@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f0f">
+  <meta name="description" content="UPG — 2009-yildan beri Oʻzbekistondagi eng yirik gaming va kompyuter texnikasi doʻkoni. Videokartalar, protsessorlar, tayyor yigʻilmalar va PK konfigurator.">
+  <title>UPG — Gaming va kompyuter texnikasi | Toshkent</title>
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UPG">
+  <meta property="og:title" content="UPG — Gaming va kompyuter texnikasi | Toshkent">
+  <meta property="og:description" content="Videokartalar, protsessorlar va professional periferiya — jahon brendlarining rasmiy kafolati bilan. 2009-yildan beri.">
+  <meta property="og:locale" content="uz_UZ">
+  <meta property="og:url" content="https://upg.uz/">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "UPG",
+    "url": "https://upg.uz",
+    "telephone": "+998991242424",
+    "openingHours": "Mo-Su 10:00-20:00",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Navoiy koʻchasi 37",
+      "addressLocality": "Toshkent",
+      "addressCountry": "UZ"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Preloader ===== -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__logo">UPG<span>RADE</span></div>
+    <div class="preloader__bar"><i></i></div>
+  </div>
+
+  <!-- ===== Top bar ===== -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="topbar__item">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span data-i18n="tb.addr">Toshkent, Navoiy koʻchasi 37 · Malika savdo markazi</span>
+        </span>
+        <span class="topbar__item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span data-i18n="tb.hours">Har kuni 10:00 — 20:00</span>
+        </span>
+      </div>
+      <div class="topbar__right">
+        <a class="topbar__item topbar__phone" href="tel:+998991242424">
+          <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+          +998 (99) 124-24-24
+        </a>
+        <div class="lang-switch" role="group" aria-label="Til tanlash">
+          <button class="lang-switch__btn is-active" data-lang="uz" type="button">UZ</button>
+          <button class="lang-switch__btn" data-lang="ru" type="button">RU</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="logo" href="#" aria-label="UPG bosh sahifa">
+        <span class="logo__upg">UPG</span><span class="logo__rade">RADE</span>
+      </a>
+
+      <button class="catalog-btn" type="button" id="catalogBtn" aria-expanded="false" aria-controls="megaMenu">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <span data-i18n="h.catalog">Katalog</span>
+      </button>
+
+      <div class="search" id="searchBox">
+        <svg class="search__icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="search__input" id="searchInput" type="search" placeholder="RTX 5080, Ryzen 9, monitor 240Hz..." autocomplete="off">
+        <button class="search__btn" type="button" data-i18n="h.search">Qidirish</button>
+        <div class="search__sugg" id="searchSugg" role="listbox"></div>
+      </div>
+
+      <nav class="header__actions" aria-label="Foydalanuvchi amallari">
+        <button class="icon-btn" type="button" aria-label="Mavzuni almashtirish" id="themeToggle">
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="icon-btn" type="button" aria-label="Sevimlilar" id="favBtn">
+          <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+          <span class="icon-btn__badge" id="favBadge">0</span>
+        </button>
+        <button class="icon-btn" type="button" aria-label="Savat" id="cartIconBtn">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+          <span class="icon-btn__badge" id="cartBadge">0</span>
+        </button>
+        <button class="burger" type="button" aria-label="Menyu" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mega menyu -->
+    <div class="mega" id="megaMenu">
+      <div class="container mega__inner">
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9 7V4m3 3V4m3 3V4M9 20v-3m3 3v-3m3 3v-3M7 9H4m3 3H4m3 3H4m16-6h-3m3 3h-3m3 3h-3"/></svg><span><b data-i18n="cat.cpu">Protsessorlar</b><i data-i18n="cnt.cpu">124 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="19" height="11" rx="2"/><circle cx="8.5" cy="12.5" r="3"/><circle cx="15.5" cy="12.5" r="3"/><path d="M4 18v2m5-2v2"/></svg><span><b data-i18n="cat.gpu">Videokartalar</b><i data-i18n="cnt.gpu">86 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M6 8v8m4-8v8m4-8v8m4-8v8M3 12h18"/></svg><span><b data-i18n="cat.ram">Operativ xotira</b><i data-i18n="cnt.ram">93 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 10h4m-4 4h4"/></svg><span><b data-i18n="cat.ssd">SSD disklar</b><i data-i18n="cnt.ssd">78 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="3.5"/><path d="M16 9h3m-3 3h3m-3 3h3"/></svg><span><b data-i18n="cat.psu">Quvvat bloklari</b><i data-i18n="cnt.psu">52 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="9" r="3"/><path d="M9 16h6m-6 2.5h4"/></svg><span><b data-i18n="cat.case">Keyslar</b><i data-i18n="cnt.case">64 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.6"/><path d="M12 6.5v4m3.9-1.6-2.5 2.3M17 14.5l-3.4-1M12 17.5v-4m-3.9 1.6 2.5-2.3M7 9.5l3.4 1"/></svg><span><b data-i18n="cat.cool">Sovutish</b><i data-i18n="cnt.cool">71 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4m-4 0h8"/></svg><span><b data-i18n="cat.mon">Monitorlar</b><i data-i18n="cnt.mon">58 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M5.5 10.5h1m2.5 0h1m2.5 0h1m2.5 0h1m2.5 0h1M7 13.8h10"/></svg><span><b data-i18n="cat.kb">Klaviaturalar</b><i data-i18n="cnt.kb">112 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg><span><b data-i18n="cat.mouse">Sichqonchalar</b><i data-i18n="cnt.mouse">96 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg><span><b data-i18n="cat.hs">Garnituralar</b><i data-i18n="cnt.hs">84 ta mahsulot</i></span></a>
+        <a class="mega__link" href="#catalog"><svg viewBox="0 0 24 24"><path d="M8 4h8l-1 8h-6L8 4zM7 12h10v2a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3v-2zM12 17v3m-3.5 1h7"/></svg><span><b data-i18n="cat.chair">Gaming kreslolar</b><i data-i18n="cnt.chair">37 ta mahsulot</i></span></a>
+      </div>
+    </div>
+
+    <nav class="subnav" id="subnav" aria-label="Asosiy menyu">
+      <div class="container subnav__inner">
+        <a href="#catalog" data-i18n="n.parts">Butlovchi qismlar</a>
+        <a href="#builds" data-i18n="n.builds">Tayyor yigʻilmalar</a>
+        <a href="#configurator" data-i18n="n.config">PK Konfigurator</a>
+        <a href="#products" data-i18n="n.products">Yangi mahsulotlar</a>
+        <a href="#services" data-i18n="n.services">Xizmatlar</a>
+        <a href="#stores" data-i18n="n.stores">Doʻkonlar</a>
+        <a href="#about" data-i18n="n.about">Biz haqimizda</a>
+        <span class="subnav__hot"><span class="dot"></span><span data-i18n="n.sale">Chegirmalar</span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== Kun taklifi ===== -->
+  <div class="dealbar">
+    <div class="container dealbar__inner">
+      <span class="dealbar__flash">⚡</span>
+      <b data-i18n="deal.label">Kun taklifi:</b>
+      <span class="dealbar__item" data-i18n="deal.item">MSI GeForce RTX 5070 Ti — chegirma −18%</span>
+      <span class="dealbar__ends"><span data-i18n="deal.ends">Tugashiga:</span> <b class="dealbar__timer" id="dealTimer">00:00:00</b></span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="hero__glow hero__glow--1"></div>
+      <div class="hero__glow hero__glow--2"></div>
+      <div class="hero__grid-bg"></div>
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <span class="chip">
+            <span class="chip__pulse"></span>
+            <span data-i18n="hero.chip">2009-yildan beri — rasmiy hamkor</span>
+          </span>
+          <h1 class="hero__title">
+            <span data-i18n="hero.t1">Kelajak darajasidagi</span><br>
+            <span class="grad-text" data-i18n="hero.t2">gaming texnika</span>
+          </h1>
+          <p class="hero__subtitle" data-i18n="hero.sub">
+            Videokartalar, protsessorlar va professional periferiya — jahon brendlarining
+            rasmiy kafolati bilan. Oʻz kompyuteringizni konfiguratorda yigʻing yoki
+            tayyor yigʻilmani tanlang.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#catalog">
+              <span data-i18n="hero.cta1">Katalogni koʻrish</span>
+              <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#configurator" data-i18n="hero.cta2">PK yigʻish</a>
+          </div>
+          <div class="hero__stats">
+            <div class="hstat"><b data-count="500">0</b><span data-i18n="hero.s1">+ ijobiy sharh</span></div>
+            <div class="hstat"><b data-count="32">0</b><span data-i18n="hero.s2">kibersport turniri</span></div>
+            <div class="hstat"><b data-count="60">0</b><span data-i18n="hero.s3">kompyuter klubi</span></div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal" aria-hidden="true">
+          <span class="float-chip float-chip--1">240 FPS</span>
+          <span class="float-chip float-chip--2">DLSS 4</span>
+          <span class="float-chip float-chip--3">RGB Sync</span>
+          <div class="gpu-card">
+            <svg viewBox="0 0 520 340" fill="none">
+              <defs>
+                <linearGradient id="gpuBody" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#1c1c24"/><stop offset="1" stop-color="#0c0c10"/>
+                </linearGradient>
+                <linearGradient id="gpuAccent" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#FF0096"/><stop offset="1" stop-color="#FF3139"/>
+                </linearGradient>
+                <radialGradient id="fanGlow" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0" stop-color="#FF0096" stop-opacity=".55"/><stop offset="1" stop-color="#FF0096" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect x="30" y="60" width="460" height="200" rx="22" fill="url(#gpuBody)" stroke="rgba(255,255,255,.12)"/>
+              <rect x="30" y="60" width="460" height="8" rx="4" fill="url(#gpuAccent)"/>
+              <circle cx="150" cy="160" r="72" fill="url(#fanGlow)"/>
+              <circle cx="370" cy="160" r="72" fill="url(#fanGlow)"/>
+              <g class="fan" style="transform-origin:150px 160px">
+                <circle cx="150" cy="160" r="58" fill="#101014" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+                <g stroke="url(#gpuAccent)" stroke-width="7" stroke-linecap="round">
+                  <path d="M150 118v30"/><path d="M186 139l-26 15"/><path d="M186 181l-26-15"/>
+                  <path d="M150 202v-30"/><path d="M114 181l26-15"/><path d="M114 139l26 15"/>
+                </g>
+                <circle cx="150" cy="160" r="13" fill="url(#gpuAccent)"/>
+              </g>
+              <g class="fan fan--rev" style="transform-origin:370px 160px">
+                <circle cx="370" cy="160" r="58" fill="#101014" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+                <g stroke="url(#gpuAccent)" stroke-width="7" stroke-linecap="round">
+                  <path d="M370 118v30"/><path d="M406 139l-26 15"/><path d="M406 181l-26-15"/>
+                  <path d="M370 202v-30"/><path d="M334 181l26-15"/><path d="M334 139l26 15"/>
+                </g>
+                <circle cx="370" cy="160" r="13" fill="url(#gpuAccent)"/>
+              </g>
+              <rect x="60" y="272" width="180" height="14" rx="7" fill="#17171d"/>
+              <rect x="60" y="272" width="110" height="14" rx="7" fill="url(#gpuAccent)" opacity=".85"/>
+              <text x="258" y="292" fill="rgba(255,255,255,.5)" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="600">GEFORCE RTX™ 5080</text>
+            </svg>
+            <div class="gpu-card__tag">
+              <span class="gpu-card__tag-label" data-i18n="hero.hit">Haftaning xiti</span>
+              <span class="gpu-card__tag-price">16 900 000 <span data-i18n="common.sum">soʻm</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>NVIDIA GEFORCE RTX™</span><i>◆</i><span>AMD RYZEN™</span><i>◆</i><span>INTEL CORE™ ULTRA</span><i>◆</i><span>ASUS ROG</span><i>◆</i><span>MSI GAMING</span><i>◆</i><span>LOGITECH G</span><i>◆</i><span>HYPERX</span><i>◆</i><span>RAZER</span><i>◆</i><span>SAMSUNG ODYSSEY</span><i>◆</i>
+          <span>NVIDIA GEFORCE RTX™</span><i>◆</i><span>AMD RYZEN™</span><i>◆</i><span>INTEL CORE™ ULTRA</span><i>◆</i><span>ASUS ROG</span><i>◆</i><span>MSI GAMING</span><i>◆</i><span>LOGITECH G</span><i>◆</i><span>HYPERX</span><i>◆</i><span>RAZER</span><i>◆</i><span>SAMSUNG ODYSSEY</span><i>◆</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Kategoriyalar ===== -->
+    <section class="section" id="catalog">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="cat.eyebrow">Katalog</span>
+            <h2 class="section__title" data-i18n="cat.title">Butlovchi qismlar va periferiya</h2>
+          </div>
+          <a class="link-more" href="category.html?cat=all">
+            <span data-i18n="cat.more">Barcha kategoriyalar</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="cat-grid" id="catGrid">
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9 7V4m3 3V4m3 3V4M9 20v-3m3 3v-3m3 3v-3M7 9H4m3 3H4m3 3H4m16-6h-3m3 3h-3m3 3h-3"/></svg></div>
+            <b data-i18n="cat.cpu">Protsessorlar</b><span data-i18n="cnt.cpu">124 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="19" height="11" rx="2"/><circle cx="8.5" cy="12.5" r="3"/><circle cx="15.5" cy="12.5" r="3"/><path d="M4 18v2m5-2v2"/></svg></div>
+            <b data-i18n="cat.gpu">Videokartalar</b><span data-i18n="cnt.gpu">86 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M6 8v8m4-8v8m4-8v8m4-8v8M3 12h18"/></svg></div>
+            <b data-i18n="cat.ram">Operativ xotira</b><span data-i18n="cnt.ram">93 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 10h4m-4 4h4"/></svg></div>
+            <b data-i18n="cat.ssd">SSD disklar</b><span data-i18n="cnt.ssd">78 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="3.5"/><path d="M9 8.5v7M5.9 10.2l6.2 3.6M5.9 13.8l6.2-3.6M16 9h3m-3 3h3m-3 3h3"/></svg></div>
+            <b data-i18n="cat.psu">Quvvat bloklari</b><span data-i18n="cnt.psu">52 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="9" r="3"/><path d="M9 16h6m-6 2.5h4"/></svg></div>
+            <b data-i18n="cat.case">Keyslar</b><span data-i18n="cnt.case">64 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 6.5v4m3.9-1.6-2.5 2.3M17 14.5l-3.4-1M12 17.5v-4m-3.9 1.6 2.5-2.3M7 9.5l3.4 1"/><circle cx="12" cy="12" r="1.6"/></svg></div>
+            <b data-i18n="cat.cool">Sovutish</b><span data-i18n="cnt.cool">71 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4m-4 0h8"/></svg></div>
+            <b data-i18n="cat.mon">Monitorlar</b><span data-i18n="cnt.mon">58 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M5.5 10.5h1m2.5 0h1m2.5 0h1m2.5 0h1m2.5 0h1M7 13.8h10"/></svg></div>
+            <b data-i18n="cat.kb">Klaviaturalar</b><span data-i18n="cnt.kb">112 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg></div>
+            <b data-i18n="cat.mouse">Sichqonchalar</b><span data-i18n="cnt.mouse">96 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></div>
+            <b data-i18n="cat.hs">Garnituralar</b><span data-i18n="cnt.hs">84 ta mahsulot</span>
+          </a>
+          <a class="cat-card reveal" href="#">
+            <div class="cat-card__icon"><svg viewBox="0 0 24 24"><path d="M8 4h8l-1 8h-6L8 4zM7 12h10v2a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3v-2zM12 17v3m-3.5 1h7"/></svg></div>
+            <b data-i18n="cat.chair">Gaming kreslolar</b><span data-i18n="cnt.chair">37 ta mahsulot</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Yigʻilmalar ===== -->
+    <section class="section section--alt" id="builds">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="b.eyebrow">Tayyor yechimlar</span>
+            <h2 class="section__title" data-i18n="b.title">Gaming yigʻilmalar</h2>
+          </div>
+          <a class="link-more" href="category.html?cat=sborki">
+            <span data-i18n="b.more">Barcha yigʻilmalar</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="builds-grid">
+          <article class="build-card reveal">
+            <div class="build-card__head">
+              <span class="build-card__tier">START</span>
+              <span class="build-card__fps">1080p · 144 FPS</span>
+            </div>
+            <ul class="build-card__specs">
+              <li><b>CPU</b> AMD Ryzen 5 7500F</li>
+              <li><b>GPU</b> GeForce RTX 5060 8GB</li>
+              <li><b>RAM</b> 16GB DDR5 5600MHz</li>
+              <li><b>SSD</b> 512GB NVMe Gen4</li>
+              <li><b>PSU</b> 650W 80+ Bronze</li>
+            </ul>
+            <div class="build-card__foot">
+              <div class="price"><b>9 500 000</b><span data-i18n="common.sum">soʻm</span></div>
+              <button class="btn btn--sm btn--ghost" type="button" data-i18n="b.btn">Batafsil</button>
+            </div>
+          </article>
+
+          <article class="build-card build-card--featured reveal">
+            <span class="build-card__ribbon" data-i18n="b.pop">Eng ommabop</span>
+            <div class="build-card__head">
+              <span class="build-card__tier">PRO</span>
+              <span class="build-card__fps">1440p · 240 FPS</span>
+            </div>
+            <ul class="build-card__specs">
+              <li><b>CPU</b> AMD Ryzen 7 9800X3D</li>
+              <li><b>GPU</b> GeForce RTX 5070 Ti 16GB</li>
+              <li><b>RAM</b> 32GB DDR5 6000MHz</li>
+              <li><b>SSD</b> 1TB NVMe Gen4</li>
+              <li><b>PSU</b> 850W 80+ Gold</li>
+            </ul>
+            <div class="build-card__foot">
+              <div class="price"><b>24 900 000</b><span data-i18n="common.sum">soʻm</span></div>
+              <button class="btn btn--sm btn--primary" type="button" data-i18n="b.btn">Batafsil</button>
+            </div>
+          </article>
+
+          <article class="build-card reveal">
+            <div class="build-card__head">
+              <span class="build-card__tier">ULTRA</span>
+              <span class="build-card__fps">4K · Ray Tracing</span>
+            </div>
+            <ul class="build-card__specs">
+              <li><b>CPU</b> Intel Core Ultra 9 285K</li>
+              <li><b>GPU</b> GeForce RTX 5090 32GB</li>
+              <li><b>RAM</b> 64GB DDR5 6400MHz</li>
+              <li><b>SSD</b> 2TB NVMe Gen5</li>
+              <li><b>PSU</b> 1200W 80+ Platinum</li>
+            </ul>
+            <div class="build-card__foot">
+              <div class="price"><b>58 700 000</b><span data-i18n="common.sum">soʻm</span></div>
+              <button class="btn btn--sm btn--ghost" type="button" data-i18n="b.btn">Batafsil</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Konfigurator ===== -->
+    <section class="section configurator" id="configurator">
+      <div class="container configurator__inner">
+        <div class="configurator__content reveal">
+          <span class="section__eyebrow" data-i18n="cf.eyebrow">PK Konfigurator</span>
+          <h2 class="section__title"><span data-i18n="cf.t1">Oʻz kompyuteringizni</span><br><span class="grad-text" data-i18n="cf.t2">oʻzingiz yarating</span></h2>
+          <p class="section__text" data-i18n="cf.text">
+            Konfiguratorimiz tanlagan qismlaringizning mosligini avtomatik tekshiradi —
+            protsessordan quvvat blokigacha. Xato yigʻish ehtimoli nolga teng.
+          </p>
+          <ol class="steps">
+            <li class="steps__item">
+              <span class="steps__num">01</span>
+              <div><b data-i18n="cf.s1t">Qismlarni tanlang</b><p data-i18n="cf.s1d">1000+ butlovchi qism ichidan byudjetingizga mosini toping</p></div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__num">02</span>
+              <div><b data-i18n="cf.s2t">Moslikni tekshiring</b><p data-i18n="cf.s2d">Tizim nomuvofiq qismlar haqida darhol ogohlantiradi</p></div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__num">03</span>
+              <div><b data-i18n="cf.s3t">Buyurtma bering</b><p data-i18n="cf.s3d">Ustalarimiz yigʻadi, sozlaydi va bepul yetkazib beradi</p></div>
+            </li>
+          </ol>
+          <a class="btn btn--primary" href="#">
+            <span data-i18n="cf.cta">Konfiguratorni ochish</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="configurator__visual reveal" aria-hidden="true">
+          <div class="config-mock">
+            <div class="config-mock__bar">
+              <i></i><i></i><i></i>
+              <span>upg.uz/konfigurator</span>
+            </div>
+            <div class="config-mock__row">
+              <span class="config-mock__part">CPU</span>
+              <span class="config-mock__name">Ryzen 7 9800X3D</span>
+              <span class="config-mock__ok">✓</span>
+            </div>
+            <div class="config-mock__row">
+              <span class="config-mock__part">GPU</span>
+              <span class="config-mock__name">RTX 5070 Ti 16GB</span>
+              <span class="config-mock__ok">✓</span>
+            </div>
+            <div class="config-mock__row">
+              <span class="config-mock__part">RAM</span>
+              <span class="config-mock__name">32GB DDR5 6000MHz</span>
+              <span class="config-mock__ok">✓</span>
+            </div>
+            <div class="config-mock__row is-active">
+              <span class="config-mock__part">PSU</span>
+              <span class="config-mock__name" data-i18n="cf.sel">Tanlanmoqda...</span>
+              <span class="config-mock__cursor"></span>
+            </div>
+            <div class="config-mock__total">
+              <span><span data-i18n="cf.comp">Mosligi:</span> <b class="ok">100%</b></span>
+              <span><span data-i18n="cf.total">Jami:</span> <b>24 900 000 <span data-i18n="common.sum">soʻm</span></b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mahsulotlar ===== -->
+    <section class="section section--alt" id="products">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="p.eyebrow">Doʻkon</span>
+            <h2 class="section__title" data-i18n="p.title">Yangi mahsulotlar</h2>
+          </div>
+          <div class="tabs" role="tablist">
+            <button class="tabs__btn is-active" data-filter="all" type="button" data-i18n="p.all">Barchasi</button>
+            <button class="tabs__btn" data-filter="new" type="button" data-i18n="p.new">Yangi</button>
+            <button class="tabs__btn" data-filter="sale" type="button" data-i18n="p.sale">Chegirma</button>
+          </div>
+        </div>
+
+        <div class="prod-grid" id="prodGrid">
+
+          <article class="prod-card reveal" data-tags="new">
+            <span class="badge badge--new" data-i18n="badge.new">Yangi</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--gpu">
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="19" height="11" rx="2"/><circle cx="8.5" cy="12.5" r="3"/><circle cx="15.5" cy="12.5" r="3"/><path d="M4 18v2m5-2h0"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.gpu">Videokarta</span>
+              <h3 class="prod-card__name">MSI GeForce RTX 5080 Gaming X Trio 16GB</h3>
+              <div class="stars" aria-label="5 dan 5 yulduz">★★★★★ <span>(47)</span></div>
+              <div class="prod-card__foot">
+                <div class="price"><b>16 900 000</b><span data-i18n="common.sum">soʻm</span></div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="new">
+            <span class="badge badge--new" data-i18n="badge.new">Yangi</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--cpu">
+              <svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9 7V4m3 3V4m3 3V4M9 20v-3m3 3v-3m3 3v-3M7 9H4m3 3H4m3 3H4m16-6h-3m3 3h-3m3 3h-3"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.cpu">Protsessor</span>
+              <h3 class="prod-card__name">AMD Ryzen 9 9950X3D · 16 yadro · AM5</h3>
+              <div class="stars" aria-label="5 dan 5 yulduz">★★★★★ <span>(89)</span></div>
+              <div class="prod-card__foot">
+                <div class="price"><b>9 250 000</b><span data-i18n="common.sum">soʻm</span></div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="sale">
+            <span class="badge badge--sale">−15%</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--monitor">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4m-4 0h8"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.mon">Monitor</span>
+              <h3 class="prod-card__name">Samsung Odyssey G7 27" QHD 240Hz</h3>
+              <div class="stars" aria-label="5 dan 4 yulduz">★★★★☆ <span>(132)</span></div>
+              <div class="prod-card__foot">
+                <div class="price">
+                  <s>7 600 000</s>
+                  <b>6 450 000</b><span data-i18n="common.sum">soʻm</span>
+                </div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="new">
+            <span class="badge badge--new" data-i18n="badge.new">Yangi</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--kb">
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M5.5 10.5h1m2.5 0h1m2.5 0h1m2.5 0h1m2.5 0h1M7 13.8h10"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.kb">Klaviatura</span>
+              <h3 class="prod-card__name">ASUS ROG Strix Scope II 96 Wireless</h3>
+              <div class="stars" aria-label="5 dan 5 yulduz">★★★★★ <span>(56)</span></div>
+              <div class="prod-card__foot">
+                <div class="price"><b>2 150 000</b><span data-i18n="common.sum">soʻm</span></div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="sale">
+            <span class="badge badge--sale">−20%</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--mouse">
+              <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.mouse">Sichqoncha</span>
+              <h3 class="prod-card__name">Logitech G Pro X Superlight 2</h3>
+              <div class="stars" aria-label="5 dan 5 yulduz">★★★★★ <span>(214)</span></div>
+              <div class="prod-card__foot">
+                <div class="price">
+                  <s>2 190 000</s>
+                  <b>1 750 000</b><span data-i18n="common.sum">soʻm</span>
+                </div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="new">
+            <span class="badge badge--new" data-i18n="badge.new">Yangi</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--headset">
+              <svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.hs">Garnitura</span>
+              <h3 class="prod-card__name">HyperX Cloud III Wireless · 120 soat</h3>
+              <div class="stars" aria-label="5 dan 4 yulduz">★★★★☆ <span>(78)</span></div>
+              <div class="prod-card__foot">
+                <div class="price"><b>1 890 000</b><span data-i18n="common.sum">soʻm</span></div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="sale">
+            <span class="badge badge--sale">−12%</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--ram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M6 8v8m4-8v8m4-8v8m4-8v8M3 12h18"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.ram">Operativ xotira</span>
+              <h3 class="prod-card__name">Kingston Fury Beast RGB 32GB DDR5 6000</h3>
+              <div class="stars" aria-label="5 dan 5 yulduz">★★★★★ <span>(163)</span></div>
+              <div class="prod-card__foot">
+                <div class="price">
+                  <s>1 870 000</s>
+                  <b>1 650 000</b><span data-i18n="common.sum">soʻm</span>
+                </div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod-card reveal" data-tags="new">
+            <span class="badge badge--new" data-i18n="badge.new">Yangi</span>
+            <button class="prod-card__fav" type="button" aria-label="Sevimlilarga qoʻshish">
+              <svg viewBox="0 0 24 24"><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>
+            </button>
+            <div class="prod-card__media prod-card__media--ssd">
+              <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 10h4m-4 4h4"/></svg>
+            </div>
+            <div class="prod-card__body">
+              <span class="prod-card__cat" data-i18n="pc.ssd">SSD disk</span>
+              <h3 class="prod-card__name">Samsung 990 Pro 2TB NVMe Gen4</h3>
+              <div class="stars" aria-label="5 dan 5 yulduz">★★★★★ <span>(97)</span></div>
+              <div class="prod-card__foot">
+                <div class="price"><b>2 350 000</b><span data-i18n="common.sum">soʻm</span></div>
+                <button class="cart-btn" type="button" aria-label="Savatga qoʻshish">
+                  <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Xizmatlar ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="sv.eyebrow">Nega aynan UPG?</span>
+            <h2 class="section__title" data-i18n="sv.title">Xizmatlarimiz</h2>
+          </div>
+        </div>
+        <div class="serv-grid">
+          <div class="serv-card reveal">
+            <div class="serv-card__icon"><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+            <b data-i18n="sv1t">Bepul yetkazib berish</b>
+            <p data-i18n="sv1d">Toshkent boʻylab 24 soat ichida, viloyatlarga 2–3 kunda yetkazamiz.</p>
+          </div>
+          <div class="serv-card reveal">
+            <div class="serv-card__icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <b data-i18n="sv2t">Rasmiy kafolat</b>
+            <p data-i18n="sv2d">Barcha mahsulotlarga 36 oygacha rasmiy kafolat va servis xizmati.</p>
+          </div>
+          <div class="serv-card reveal">
+            <div class="serv-card__icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div>
+            <b data-i18n="sv3t">Muddatli toʻlov</b>
+            <p data-i18n="sv3d">UPG Credit, Uzum Nasiya, Solfy va ZoodPay orqali 3–12 oyga boʻlib toʻlang.</p>
+          </div>
+          <div class="serv-card reveal">
+            <div class="serv-card__icon"><svg viewBox="0 0 24 24"><path d="M4 9a8 8 0 0 1 14-3m2 9a8 8 0 0 1-14 3"/><path d="M18 2v4h-4M6 22v-4h4"/></svg></div>
+            <b data-i18n="sv4t">Trade-in</b>
+            <p data-i18n="sv4d">Eski texnikangizni topshiring va yangisiga chegirma bilan ega boʻling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About / CTA banner ===== -->
+    <section class="about" id="about">
+      <div class="container about__inner">
+        <div class="about__content reveal">
+          <span class="section__eyebrow section__eyebrow--light" data-i18n="ab.eyebrow">Biz haqimizda</span>
+          <h2 class="about__title" data-i18n="ab.title">15 yildan beri geymerlar tanlovi</h2>
+          <p data-i18n="ab.text">
+            UPG — 2009-yilda tashkil etilgan, bugungi kunda Oʻzbekistondagi eng yirik gaming
+            texnika doʻkonlaridan biri. Biz xalqaro brendlarning rasmiy hamkorimiz, kibersport
+            turnirlari tashkil qilamiz va butun mamlakat boʻylab kompyuter klublarini jihozlaymiz.
+          </p>
+          <div class="about__stats">
+            <div class="astat reveal"><b data-count="15">0</b><span data-i18n="ab.s1">yillik tajriba</span></div>
+            <div class="astat reveal"><b data-count="500">0</b><span data-i18n="ab.s2">+ ijobiy sharh</span></div>
+            <div class="astat reveal"><b data-count="32">0</b><span data-i18n="ab.s3">kibersport turniri</span></div>
+            <div class="astat reveal"><b data-count="60">0</b><span data-i18n="ab.s4">jihozlangan klub</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Sharhlar ===== -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="ts.eyebrow">Mijozlar fikri</span>
+            <h2 class="section__title" data-i18n="ts.title">Bizga ishonishadi</h2>
+          </div>
+          <div class="rating-pill reveal">
+            <span class="rating-pill__score">4.9</span>
+            <span class="stars">★★★★★</span>
+            <span class="rating-pill__count" data-i18n="ts.count">500+ sharh asosida</span>
+          </div>
+        </div>
+
+        <div class="testi-grid">
+          <figure class="testi-card reveal">
+            <div class="stars">★★★★★</div>
+            <blockquote data-i18n="ts1.text">
+              Konfiguratorda PRO yigʻilmani buyurtma qildim — bir kunda yigʻib, uyimga
+              yetkazib berishdi. FPS reklamadagidan ham yuqori chiqdi!
+            </blockquote>
+            <figcaption>
+              <span class="testi-card__avatar">JT</span>
+              <span><b data-i18n="ts1.name">Jasur T.</b><i data-i18n="ts1.role">CS2 oʻyinchisi</i></span>
+            </figcaption>
+          </figure>
+          <figure class="testi-card reveal">
+            <div class="stars">★★★★★</div>
+            <blockquote data-i18n="ts2.text">
+              Videokartani muddatli toʻlovga oldim, hujjatlar 10 daqiqada tayyor boʻldi.
+              Narxlar bozordagi eng adolatlisi.
+            </blockquote>
+            <figcaption>
+              <span class="testi-card__avatar">AR</span>
+              <span><b data-i18n="ts2.name">Aziz R.</b><i data-i18n="ts2.role">Doimiy mijoz</i></span>
+            </figcaption>
+          </figure>
+          <figure class="testi-card reveal">
+            <div class="stars">★★★★★</div>
+            <blockquote data-i18n="ts3.text">
+              Kompyuter klubimizni toʻliq UPG jihozladi — 20 ta PK, monitorlar, kreslolar.
+              Professional yondashuv uchun rahmat!
+            </blockquote>
+            <figcaption>
+              <span class="testi-card__avatar">MS</span>
+              <span><b data-i18n="ts3.name">Malika S.</b><i data-i18n="ts3.role">Klub egasi</i></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Doʻkonlar ===== -->
+    <section class="section section--alt" id="stores">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="st.eyebrow">Doʻkonlarimiz</span>
+            <h2 class="section__title" data-i18n="st.title">Bizga tashrif buyuring</h2>
+          </div>
+        </div>
+        <div class="stores-grid">
+          <div class="store-card reveal">
+            <div class="store-card__icon">
+              <svg viewBox="0 0 24 24"><path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <b data-i18n="st1.name">Markaziy doʻkon</b>
+            <p data-i18n="st1.addr">Navoiy koʻchasi 37, Toshkent</p>
+            <ul>
+              <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> <span data-i18n="tb.hours2">Har kuni 10:00 — 20:00</span></li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> <a href="tel:+998991242424">+998 (99) 124-24-24</a></li>
+            </ul>
+            <a class="btn btn--sm btn--ghost" href="https://maps.google.com/?q=Navoi+street+37+Tashkent" target="_blank" rel="noopener" data-i18n="st.map">Xaritada ochish</a>
+          </div>
+          <div class="store-card reveal">
+            <div class="store-card__icon">
+              <svg viewBox="0 0 24 24"><path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <b data-i18n="st2.name">Malika filiali</b>
+            <p data-i18n="st2.addr">Malika savdo markazi, Toshkent</p>
+            <ul>
+              <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> <span data-i18n="tb.hours3">Har kuni 10:00 — 20:00</span></li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> <a href="tel:+998971242424">+998 (97) 124-24-24</a></li>
+            </ul>
+            <a class="btn btn--sm btn--ghost" href="https://maps.google.com/?q=Malika+trade+center+Tashkent" target="_blank" rel="noopener" data-i18n="st.map2">Xaritada ochish</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="faq.eyebrow">Savol-javob</span>
+            <h2 class="section__title" data-i18n="faq.title">Koʻp beriladigan savollar</h2>
+          </div>
+        </div>
+        <div class="faq">
+          <details class="faq__item reveal">
+            <summary><span data-i18n="fq1q">Yetkazib berish qancha vaqt oladi?</span><i></i></summary>
+            <p data-i18n="fq1a">Toshkent boʻylab buyurtmalar 24 soat ichida, viloyatlarga 2–3 ish kunida yetkaziladi. 1 mln soʻmdan yuqori xaridlarga yetkazib berish bepul.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary><span data-i18n="fq2q">Muddatli toʻlovni qanday rasmiylashtiraman?</span><i></i></summary>
+            <p data-i18n="fq2a">Doʻkonda yoki saytda UPG Credit, Uzum Nasiya, Solfy yoki ZoodPay orqali 3 daqiqada rasmiylashtiriladi. Faqat pasport kerak.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary><span data-i18n="fq3q">Kafolat qanday ishlaydi?</span><i></i></summary>
+            <p data-i18n="fq3a">Barcha mahsulotlarga 12–36 oylik rasmiy kafolat beriladi. Nosozlik yuzaga kelsa, servis markazimiz bepul taʼmirlaydi yoki almashtirib beradi.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary><span data-i18n="fq4q">Yigʻilgan PKni sozlab berasizlarmi?</span><i></i></summary>
+            <p data-i18n="fq4a">Ha, har bir yigʻilgan kompyuterga BIOS sozlamalari, drayverlar va stress-test bepul kiradi. Xohishingizga koʻra Windows ham oʻrnatamiz.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary><span data-i18n="fq5q">Mahsulotni qaytarish mumkinmi?</span><i></i></summary>
+            <p data-i18n="fq5a">Ha, 10 kun ichida mahsulot asl holatida boʻlsa, qaytarish yoki almashtirish mumkin.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Ijtimoiy tarmoqlar ===== -->
+    <section class="section section--alt" id="socials">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <span class="section__eyebrow" data-i18n="so.eyebrow">Jamiyat</span>
+            <h2 class="section__title" data-i18n="so.title">Bizga qoʻshiling</h2>
+          </div>
+        </div>
+        <div class="soc-grid">
+          <a class="soc-card reveal" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <b>212K</b><span>Instagram</span>
+          </a>
+          <a class="soc-card reveal" href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="13" rx="4"/><path d="m10.5 10 4 2.5-4 2.5z" fill="currentColor" stroke="none"/></svg>
+            <b>142K</b><span>YouTube</span>
+          </a>
+          <a class="soc-card reveal" href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M15 4c.4 2.4 2 4 4.5 4.2V11c-1.7 0-3.2-.5-4.5-1.4v5.9A5.5 5.5 0 1 1 9.5 10v3a2.5 2.5 0 1 0 2.5 2.5V4z"/></svg>
+            <b>30K</b><span>TikTok</span>
+          </a>
+          <a class="soc-card reveal" href="#" aria-label="Telegram">
+            <svg viewBox="0 0 24 24"><path d="m21 4-18 7 5.5 2L10 19l3-3.5 5 3.5z"/></svg>
+            <b>24.1K</b><span>Telegram</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Newsletter ===== -->
+    <section class="section newsletter-wrap">
+      <div class="container">
+        <div class="newsletter reveal">
+          <div class="newsletter__glow"></div>
+          <div class="newsletter__content">
+            <h2 data-i18n="nl.title">Chegirmalardan birinchi boʻlib xabardor boʻling</h2>
+            <p data-i18n="nl.text">Haftasiga bir marta — faqat eng zoʻr takliflar. Spam yoʻq.</p>
+          </div>
+          <form class="newsletter__form" id="newsForm" novalidate>
+            <input type="email" id="newsEmail" placeholder="Email manzilingiz" data-i18n-ph="nl.ph" required>
+            <button class="btn btn--primary" type="submit" data-i18n="nl.btn">Obuna boʻlish</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer" id="contacts">
+    <div class="footer__accent"></div>
+    <div class="container footer__inner">
+      <div class="footer__col footer__col--brand">
+        <a class="logo" href="#">
+          <span class="logo__upg">UPG</span><span class="logo__rade">RADE</span>
+        </a>
+        <p data-i18n="ft.desc">Oʻzbekistondagi eng yirik gaming va kompyuter texnikasi doʻkoni. 2009-yildan beri siz bilan.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="13" rx="4"/><path d="m10.5 10 4 2.5-4 2.5z" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M15 4c.4 2.4 2 4 4.5 4.2V11c-1.7 0-3.2-.5-4.5-1.4v5.9A5.5 5.5 0 1 1 9.5 10v3a2.5 2.5 0 1 0 2.5 2.5V4z"/></svg></a>
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="m21 4-18 7 5.5 2L10 19l3-3.5 5 3.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <b data-i18n="ft.cat">Katalog</b>
+        <a href="category.html?cat=noutbuklar" data-i18n="cat.laptop">Noutbuklar</a>
+        <a href="category.html?cat=monitorlar" data-i18n="cat.mon">Monitorlar</a>
+        <a href="category.html?cat=klaviaturalar" data-i18n="cat.kb">Klaviaturalar</a>
+        <a href="category.html?cat=sichqonchalar" data-i18n="cat.mouse">Sichqonchalar</a>
+        <a href="category.html?cat=kreslolar" data-i18n="cat.chair">Gaming kreslolar</a>
+      </div>
+      <div class="footer__col">
+        <b data-i18n="ft.comp">Kompaniya</b>
+        <a href="#about" data-i18n="ft.l1">Biz haqimizda</a>
+        <a href="#stores" data-i18n="ft.l2">Doʻkonlarimiz</a>
+        <a href="#services" data-i18n="ft.l3">Yetkazib berish</a>
+        <a href="#faq" data-i18n="ft.l4">Kafolat va qaytarish</a>
+        <a href="#" data-i18n="ft.l5">Blog</a>
+      </div>
+      <div class="footer__col">
+        <b data-i18n="ft.contact">Aloqa</b>
+        <a href="tel:+998991242424">+998 (99) 124-24-24</a>
+        <a href="tel:+998971242424">+998 (97) 124-24-24</a>
+        <span data-i18n="st1.addr2">Navoiy koʻchasi 37, Toshkent</span>
+        <span data-i18n="st2.addr2">Malika savdo markazi</span>
+        <span data-i18n="tb.hours4">Har kuni 10:00 — 20:00</span>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span data-i18n="ft.copy">© 2009–2026 UPG. Barcha huquqlar himoyalangan.</span>
+      <div class="footer__pay">
+        <span>UzCard</span><span>Humo</span><span>VISA</span><span>MC</span><span>OX Pay</span><span>ZoodPay</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Toast ===== -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Yuqoriga qaytish">
+    <svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg>
+  </button>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>
