@@ -584,6 +584,11 @@ window.UPG = (function () {
   function iconSVG(type) {
     var M = {
       pc: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/>',
+      cpu: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9 7V4m3 3V4m3 3V4M9 20v-3m3 3v-3m3 3v-3M7 9H4m3 3H4m3 3H4m16-6h-3m3 3h-3m3 3h-3"/>',
+      gpu: '<rect x="2" y="7" width="19" height="11" rx="2"/><circle cx="8.5" cy="12.5" r="3"/><circle cx="15.5" cy="12.5" r="3"/><path d="M4 18v2m5-2v2"/>',
+      mobo: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="7" y="7" width="6" height="6" rx="1"/><path d="M15 8h3m-3 3h3M8 16h8"/>',
+      ram: '<rect x="3" y="8" width="18" height="8" rx="1"/><path d="M6 8v8m4-8v8m4-8v8m4-8v8M3 12h18"/>',
+      ssd: '<rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 10h4m-4 4h4"/>',
       laptop: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M2 20h20"/>',
       monitor: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4m-4 0h8"/>',
       kb: '<rect x="2" y="7" width="20" height="10" rx="2"/><path d="M5.5 10.5h1m2.5 0h1m2.5 0h1m2.5 0h1m2.5 0h1M7 13.8h10"/>',
