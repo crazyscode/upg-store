@@ -16,7 +16,8 @@ window.UPG_ART = (function () {
   /* Brend yorligʻi (pastda) */
   function label(brand) {
     if (!brand) return "";
-    return '<text x="120" y="171" text-anchor="middle" fill="rgba(255,255,255,.5)" ' +
+    /* var(--muted) — light temada ham oʻqiladigan boʻlishi uchun */
+    return '<text x="120" y="171" text-anchor="middle" fill="var(--muted, rgba(255,255,255,.5))" ' +
       'font-family="Space Grotesk, Inter, sans-serif" font-size="11" font-weight="600" ' +
       'letter-spacing="1.5">' + esc(brand.toUpperCase()) + '</text>';
   }

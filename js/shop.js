@@ -57,7 +57,7 @@
         '<div class="prod-card__body">' +
           '<span class="prod-card__cat">' + esc(p.brand) + '</span>' +
           '<h3 class="prod-card__name"><a href="product.html?id=' + p.id + '">' + esc(p.name) + '</a></h3>' +
-          '<div class="stars">' + starsHTML(r.stars) + ' <span>(' + r.count + ')</span></div>' +
+          '<div class="stars" aria-label="5 dan ' + r.stars + ' yulduz">' + starsHTML(r.stars) + ' <span>(' + r.count + ')</span></div>' +
           '<div class="prod-card__foot">' +
             '<div class="price">' + (p.old ? '<s>' + fmtNum(p.old) + '</s>' : "") +
               '<b>' + fmtNum(p.price) + '</b><span>' + sumWord() + '</span></div>' +
@@ -73,6 +73,8 @@
   /* ============================================================
      Bosh sahifa — ommabop mahsulotlar gridi + tablar
      ============================================================ */
+  var tabsBound = false;
+
   function renderFeatured() {
     var grid = document.getElementById("prodGrid");
     if (!grid) return;
@@ -90,13 +92,17 @@
     paint("all");
 
     var tabs = document.querySelectorAll(".tabs__btn");
-    tabs.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        tabs.forEach(function (b) { b.classList.remove("is-active"); });
-        btn.classList.add("is-active");
-        paint(btn.dataset.filter);
+    if (!tabsBound) {
+      tabsBound = true;
+      tabs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          tabs.forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-selected", "false"); });
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-selected", "true");
+          paint(btn.dataset.filter);
+        });
       });
-    });
+    }
   }
 
   /* ============================================================
@@ -144,15 +150,18 @@
 
     var slug = getParam("cat") || "all";
     var q = (getParam("q") || "").trim().toLowerCase();
+    var favMode = getParam("fav") === "1";
     var cat = catBySlug(slug);
 
     var base = D.products.filter(function (p) {
+      if (favMode && !UPG.isFav(p.id)) return false;
       if (slug !== "all" && p.cat !== slug) return false;
       if (q && p.name.toLowerCase().indexOf(q) === -1 && p.brand.toLowerCase().indexOf(q) === -1) return false;
       return true;
     });
 
-    var title = cat ? (cat[UPG.lang()] || cat.uz) : (q ? '"' + q + '"' : UPG.t("shop.catalog"));
+    var title = favMode ? UPG.t("shop.favs")
+      : cat ? (cat[UPG.lang()] || cat.uz) : (q ? '"' + q + '"' : UPG.t("shop.catalog"));
     document.title = title + " — UPG";
 
     var brands = [];
@@ -176,6 +185,8 @@
         '<div><h1 class="catpage-hero__title">' + esc(title) + '</h1>' +
         '<p class="catpage-hero__sub"><span id="resCount">' + base.length + '</span> ' + UPG.t("shop.results") + '</p></div>' +
       '</div>' +
+      '<button class="filters-toggle" id="filtersToggle" type="button" aria-expanded="false" aria-controls="filters">' +
+        '<svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>' + UPG.t("shop.filters") + '</button>' +
       '<div class="shop">' +
         '<aside class="filters" id="filters">' +
           '<div class="filters__head"><b>' + UPG.t("shop.filters") + '</b>' +
@@ -226,8 +237,11 @@
       if (!list.length) {
         grid.classList.add("is-empty");
         grid.innerHTML = '<div class="shop-empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
-          '<b>' + UPG.t("shop.empty") + '</b>' +
-          '<button class="btn btn--ghost btn--sm" id="emptyReset" type="button">' + UPG.t("shop.emptyBtn") + '</button></div>';
+          '<b>' + UPG.t(favMode && !base.length ? "shop.favsEmpty" : "shop.empty") + '</b>' +
+          (favMode && !base.length
+            ? '<a class="btn btn--ghost btn--sm" href="index.html#catalog">' + UPG.t("cart.emptyBtn") + '</a>'
+            : '<button class="btn btn--ghost btn--sm" id="emptyReset" type="button">' + UPG.t("shop.emptyBtn") + '</button>') +
+          '</div>';
         var er = document.getElementById("emptyReset");
         if (er) er.addEventListener("click", resetAll);
       } else {
@@ -251,6 +265,18 @@
         apply();
       });
     });
+    /* Mobil: filtr panelini ochish/yopish */
+    var filtersEl = document.getElementById("filters");
+    var filtersToggle = document.getElementById("filtersToggle");
+    function closeFilters() {
+      filtersEl.classList.remove("is-open");
+      filtersToggle.setAttribute("aria-expanded", "false");
+    }
+    filtersToggle.addEventListener("click", function () {
+      var open = filtersEl.classList.toggle("is-open");
+      filtersToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
     var applyBtn = document.getElementById("applyPrice");
     if (applyBtn) applyBtn.addEventListener("click", function () {
       var mn = parseInt(document.getElementById("priceMin").value, 10);
@@ -258,6 +284,7 @@
       state.min = isNaN(mn) ? null : mn;
       state.max = isNaN(mx) ? null : mx;
       apply();
+      closeFilters();
     });
     document.getElementById("sortSel").addEventListener("change", function () { state.sort = this.value; apply(); });
     document.getElementById("resetFilters").addEventListener("click", resetAll);
@@ -310,7 +337,7 @@
         '<div class="pdp__info">' +
           '<span class="pdp__brand">' + esc(p.brand) + '</span>' +
           '<h1 class="pdp__title">' + esc(p.name) + '</h1>' +
-          '<div class="pdp__rating"><span class="stars">' + starsHTML(r.stars) + '</span>' +
+          '<div class="pdp__rating"><span class="stars" aria-label="5 dan ' + r.stars + ' yulduz">' + starsHTML(r.stars) + '</span>' +
             '<span>' + r.val.toFixed(1) + ' · ' + r.count + '</span>' +
             '<span class="pdp__stock"><i></i>' + UPG.t("shop.inStock") + '</span></div>' +
           '<div class="pdp__price">' +

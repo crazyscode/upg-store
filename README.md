@@ -21,12 +21,14 @@ Sof statik sayt — HTML + CSS + Vanilla JavaScript. Build talab qilinmaydi.
 index.html          — bosh sahifa
 category.html       — kategoriya sahifasi (dinamik)
 product.html        — mahsulot sahifasi (dinamik)
+configurator.html   — PK konfigurator sahifasi
 css/style.css       — asosiy dizayn
-css/shop.css        — doʻkon sahifalari
+css/shop.css        — doʻkon va konfigurator sahifalari
 js/data.js          — mahsulotlar bazasi
 js/main.js          — header, savat, til, mavzu
 js/art.js           — SVG mahsulot illyustratsiyalari
 js/shop.js          — kategoriya/mahsulot render
+js/configurator.js  — PK konfigurator (moslik tekshiruvi)
 ```
 
 ## Lokal ishga tushirish
@@ -40,6 +42,6 @@ python -m http.server 8000
 
 Statik sayt boʻlgani uchun istalgan hostingga joylashadi:
 
-- **GitHub Pages** — Settings → Pages → Branch: main / root
+- **GitHub Pages** — `main` branchga push qilinganda `.github/workflows/deploy.yml` avtomatik deploy qiladi (Settings → Pages → Source: **GitHub Actions** boʻlishi kerak)
 - **Vercel** — `vercel deploy` (yoki repo'ni ulang)
 - **Netlify** — papkani [netlify.com/drop](https://app.netlify.com/drop) ga tashlang

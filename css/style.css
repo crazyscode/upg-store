@@ -6,6 +6,7 @@
 :root {
   --primary: #FF0096;
   --secondary: #FF3139;
+  --ok: #28c840;
   --grad: linear-gradient(90deg, #FF0096, #FF3139);
 
   --bg: #070709;
@@ -26,6 +27,7 @@
 }
 
 [data-theme="light"] {
+  --ok: #12923a;
   --bg: #ffffff;
   --bg-alt: #f4f5f7;
   --card: #ffffff;
@@ -340,7 +342,8 @@ body.loaded .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
 .dealbar__flash { animation: flash-blink 1.4s ease infinite; }
 @keyframes flash-blink { 50% { opacity: 0.4; } }
 .dealbar b { font-weight: 700; }
-.dealbar__item { opacity: 0.94; }
+.dealbar__item { opacity: 0.94; transition: opacity 0.2s; }
+a.dealbar__item:hover { opacity: 1; text-decoration: underline; }
 .dealbar__ends {
   margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
   font-size: 0.8rem; opacity: 0.95;
@@ -703,7 +706,7 @@ body.loaded .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
   background: rgba(255, 0, 150, 0.1); border-radius: 7px;
 }
 .config-mock__name { flex: 1; font-weight: 500; }
-.config-mock__ok { color: #28c840; font-weight: 700; }
+.config-mock__ok { color: var(--ok); font-weight: 700; }
 .config-mock__cursor {
   width: 9px; height: 18px; background: var(--primary);
   animation: blink 1s steps(2) infinite;
@@ -716,7 +719,7 @@ body.loaded .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
   color: var(--muted); font-size: 0.84rem;
 }
 .config-mock__total b { color: var(--text); font-family: var(--font-head); }
-.config-mock__total b.ok { color: #28c840; }
+.config-mock__total b.ok { color: var(--ok); }
 
 /* ---------- Mahsulotlar ---------- */
 .tabs { display: flex; gap: 6px; padding: 5px; background: var(--card); border: 1px solid var(--border); border-radius: 99px; }
@@ -1134,6 +1137,14 @@ body.loaded .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
+}
+
+/* iOS Safari fokusda zoom qilmasligi uchun inputlar kamida 16px boʻlishi kerak */
+@media (max-width: 900px) {
+  .search__input,
+  .newsletter__form input,
+  .filter-price input,
+  .sortbar__sort select { font-size: 16px; }
 }
 
 /* ============================================================

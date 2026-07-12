@@ -154,8 +154,8 @@
 
 .pdp__rating { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 0.86rem; color: var(--muted); margin-bottom: 22px; }
 .pdp__rating .stars { font-size: 0.95rem; }
-.pdp__stock { display: inline-flex; align-items: center; gap: 7px; color: #28c840; font-weight: 600; }
-.pdp__stock i { width: 8px; height: 8px; border-radius: 50%; background: #28c840; box-shadow: 0 0 0 3px rgba(40,200,64,.2); }
+.pdp__stock { display: inline-flex; align-items: center; gap: 7px; color: var(--ok); font-weight: 600; }
+.pdp__stock i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px rgba(40,200,64,.2); }
 
 .pdp__price { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding: 20px 0; border-block: 1px solid var(--border); margin-bottom: 22px; }
 .pdp__price b { font-family: var(--font-head); font-size: 2rem; font-weight: 700; letter-spacing: -1px; }
@@ -253,6 +253,15 @@
 .drawer__clear { font-size: 0.84rem; color: var(--muted); transition: color .2s; }
 .drawer__clear:hover { color: var(--secondary); }
 
+/* Mobil filtr tugmasi (default yashirin, tor ekranda koʻrsatiladi) */
+.filters-toggle {
+  display: none; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--card);
+  font-weight: 600; font-size: 0.88rem; margin-bottom: 18px;
+}
+.filters-toggle svg { width: 17px; height: 17px; }
+
 /* ============================================================
    Adaptivlik
    ============================================================ */
@@ -286,15 +295,6 @@
   .pdp__media { height: 260px; }
   .drawer { width: 100%; }
 }
-
-/* Mobil filtr tugmasi (default yashirin, JS bilan koʻrsatiladi) */
-.filters-toggle {
-  display: none; align-items: center; gap: 8px;
-  padding: 11px 18px; border-radius: var(--radius-sm);
-  border: 1px solid var(--border); background: var(--card);
-  font-weight: 600; font-size: 0.88rem; margin-bottom: 18px;
-}
-.filters-toggle svg { width: 17px; height: 17px; }
 
 /* ============================================================
    PK Konfigurator
@@ -356,7 +356,7 @@
 .cfg-status--idle { background: var(--card-2); color: var(--muted); text-align: center; }
 .cfg-status--ok {
   display: flex; align-items: center; gap: 10px;
-  background: rgba(40,200,64,.12); color: #28c840; font-weight: 600;
+  background: rgba(40,200,64,.12); color: var(--ok); font-weight: 600;
   border: 1px solid rgba(40,200,64,.3);
 }
 .cfg-status--ok svg { width: 20px; height: 20px; stroke-width: 2.4; flex-shrink: 0; }
