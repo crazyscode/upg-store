@@ -12,9 +12,13 @@
   <meta property="og:title" content="UPG — Gaming va kompyuter texnikasi | Toshkent">
   <meta property="og:description" content="Videokartalar, protsessorlar va professional periferiya — jahon brendlarining rasmiy kafolati bilan. 2009-yildan beri.">
   <meta property="og:locale" content="uz_UZ">
-  <meta property="og:url" content="https://upg.uz/">
+  <meta property="og:url" content="https://crazyscode.github.io/upg-store/">
+  <meta property="og:image" content="https://crazyscode.github.io/upg-store/assets/logo.png">
+  <link rel="canonical" href="https://crazyscode.github.io/upg-store/">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script>(function(){try{var t=localStorage.getItem("upg-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
+  <noscript><style>.preloader{display:none}</style></noscript>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -86,7 +90,7 @@
 
       <div class="search" id="searchBox">
         <svg class="search__icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input class="search__input" id="searchInput" type="search" placeholder="RTX 5080, Ryzen 9, monitor 240Hz..." autocomplete="off">
+        <input class="search__input" id="searchInput" type="search" placeholder="RTX 5080, Ryzen 9, monitor 240Hz..." autocomplete="off" aria-label="Mahsulot qidirish">
         <button class="search__btn" type="button" data-i18n="h.search">Qidirish</button>
         <div class="search__sugg" id="searchSugg" role="listbox"></div>
       </div>
@@ -147,7 +151,7 @@
     <div class="container dealbar__inner">
       <span class="dealbar__flash">⚡</span>
       <b data-i18n="deal.label">Kun taklifi:</b>
-      <span class="dealbar__item" data-i18n="deal.item">MSI GeForce RTX 5070 Ti — chegirma −18%</span>
+      <a class="dealbar__item" href="product.html?id=wf4" data-i18n="deal.item">ASUS ROG Rapture GT-AX11000 — chegirma −20%</a>
       <span class="dealbar__ends"><span data-i18n="deal.ends">Tugashiga:</span> <b class="dealbar__timer" id="dealTimer">00:00:00</b></span>
     </div>
   </div>
@@ -260,51 +264,51 @@
         </div>
 
         <div class="cat-grid" id="catGrid">
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=all">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9 7V4m3 3V4m3 3V4M9 20v-3m3 3v-3m3 3v-3M7 9H4m3 3H4m3 3H4m16-6h-3m3 3h-3m3 3h-3"/></svg></div>
             <b data-i18n="cat.cpu">Protsessorlar</b><span data-i18n="cnt.cpu">124 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=all">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="19" height="11" rx="2"/><circle cx="8.5" cy="12.5" r="3"/><circle cx="15.5" cy="12.5" r="3"/><path d="M4 18v2m5-2v2"/></svg></div>
             <b data-i18n="cat.gpu">Videokartalar</b><span data-i18n="cnt.gpu">86 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=all">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M6 8v8m4-8v8m4-8v8m4-8v8M3 12h18"/></svg></div>
             <b data-i18n="cat.ram">Operativ xotira</b><span data-i18n="cnt.ram">93 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=all">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 10h4m-4 4h4"/></svg></div>
             <b data-i18n="cat.ssd">SSD disklar</b><span data-i18n="cnt.ssd">78 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=quvvat">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="3.5"/><path d="M9 8.5v7M5.9 10.2l6.2 3.6M5.9 13.8l6.2-3.6M16 9h3m-3 3h3m-3 3h3"/></svg></div>
             <b data-i18n="cat.psu">Quvvat bloklari</b><span data-i18n="cnt.psu">52 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=keyslar">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="9" r="3"/><path d="M9 16h6m-6 2.5h4"/></svg></div>
             <b data-i18n="cat.case">Keyslar</b><span data-i18n="cnt.case">64 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=sovutish">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 6.5v4m3.9-1.6-2.5 2.3M17 14.5l-3.4-1M12 17.5v-4m-3.9 1.6 2.5-2.3M7 9.5l3.4 1"/><circle cx="12" cy="12" r="1.6"/></svg></div>
             <b data-i18n="cat.cool">Sovutish</b><span data-i18n="cnt.cool">71 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=monitorlar">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4m-4 0h8"/></svg></div>
             <b data-i18n="cat.mon">Monitorlar</b><span data-i18n="cnt.mon">58 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=klaviaturalar">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M5.5 10.5h1m2.5 0h1m2.5 0h1m2.5 0h1m2.5 0h1M7 13.8h10"/></svg></div>
             <b data-i18n="cat.kb">Klaviaturalar</b><span data-i18n="cnt.kb">112 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=sichqonchalar">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg></div>
             <b data-i18n="cat.mouse">Sichqonchalar</b><span data-i18n="cnt.mouse">96 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=garnituralar">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></div>
             <b data-i18n="cat.hs">Garnituralar</b><span data-i18n="cnt.hs">84 ta mahsulot</span>
           </a>
-          <a class="cat-card reveal" href="#">
+          <a class="cat-card reveal" href="category.html?cat=kreslolar">
             <div class="cat-card__icon"><svg viewBox="0 0 24 24"><path d="M8 4h8l-1 8h-6L8 4zM7 12h10v2a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3v-2zM12 17v3m-3.5 1h7"/></svg></div>
             <b data-i18n="cat.chair">Gaming kreslolar</b><span data-i18n="cnt.chair">37 ta mahsulot</span>
           </a>
@@ -341,7 +345,7 @@
             </ul>
             <div class="build-card__foot">
               <div class="price"><b>9 500 000</b><span data-i18n="common.sum">soʻm</span></div>
-              <button class="btn btn--sm btn--ghost" type="button" data-i18n="b.btn">Batafsil</button>
+              <a class="btn btn--sm btn--ghost" href="product.html?id=sb1" data-i18n="b.btn">Batafsil</a>
             </div>
           </article>
 
@@ -360,7 +364,7 @@
             </ul>
             <div class="build-card__foot">
               <div class="price"><b>24 900 000</b><span data-i18n="common.sum">soʻm</span></div>
-              <button class="btn btn--sm btn--primary" type="button" data-i18n="b.btn">Batafsil</button>
+              <a class="btn btn--sm btn--primary" href="product.html?id=sb2" data-i18n="b.btn">Batafsil</a>
             </div>
           </article>
 
@@ -378,7 +382,7 @@
             </ul>
             <div class="build-card__foot">
               <div class="price"><b>58 700 000</b><span data-i18n="common.sum">soʻm</span></div>
-              <button class="btn btn--sm btn--ghost" type="button" data-i18n="b.btn">Batafsil</button>
+              <a class="btn btn--sm btn--ghost" href="product.html?id=sb3" data-i18n="b.btn">Batafsil</a>
             </div>
           </article>
         </div>
@@ -456,12 +460,12 @@
         <div class="section__head reveal">
           <div>
             <span class="section__eyebrow" data-i18n="p.eyebrow">Doʻkon</span>
-            <h2 class="section__title" data-i18n="p.title">Yangi mahsulotlar</h2>
+            <h2 class="section__title" data-i18n="p.title">Ommabop mahsulotlar</h2>
           </div>
           <div class="tabs" role="tablist">
-            <button class="tabs__btn is-active" data-filter="all" type="button" data-i18n="p.all">Barchasi</button>
-            <button class="tabs__btn" data-filter="new" type="button" data-i18n="p.new">Yangi</button>
-            <button class="tabs__btn" data-filter="sale" type="button" data-i18n="p.sale">Chegirma</button>
+            <button class="tabs__btn is-active" role="tab" aria-selected="true" data-filter="all" type="button" data-i18n="p.all">Barchasi</button>
+            <button class="tabs__btn" role="tab" aria-selected="false" data-filter="new" type="button" data-i18n="p.new">Yangi</button>
+            <button class="tabs__btn" role="tab" aria-selected="false" data-filter="sale" type="button" data-i18n="p.sale">Chegirma</button>
           </div>
         </div>
 

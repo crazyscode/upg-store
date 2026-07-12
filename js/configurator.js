@@ -120,6 +120,9 @@
     return COMPONENTS[slot].filter(function (c) { return c.id === id; })[0] || null;
   }
 
+  /* Bazadan olib tashlangan (eskirgan) id'larni tozalaymiz */
+  SLOTS.forEach(function (s) { if (sel[s] && !get(s)) delete sel[s]; });
+
   /* ---------- Moslik dvigateli ---------- */
   function analyze() {
     var w = [], L2 = L();
@@ -154,6 +157,8 @@
   /* ---------- Render ---------- */
   function render() {
     var L2 = L();
+    document.title = L2.title + " — UPG";
+    document.body.style.overflow = ""; // til almashganda ochiq picker qulfini yechamiz
     app.innerHTML =
       '<nav class="breadcrumb"><a href="index.html">' + UPG.t("shop.home") + '</a><span>/</span><b>' + L2.title + '</b></nav>' +
       '<div class="cfg-head"><div class="cfg-head__icon">' +
@@ -163,7 +168,7 @@
         '<div class="cfg-slots" id="cfgSlots"></div>' +
         '<aside class="cfg-summary" id="cfgSummary"></aside>' +
       '</div>' +
-      '<div class="cfg-picker" id="cfgPicker" aria-hidden="true"><div class="cfg-picker__panel">' +
+      '<div class="cfg-picker" id="cfgPicker" aria-hidden="true"><div class="cfg-picker__panel" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">' +
         '<div class="cfg-picker__head"><b id="pickerTitle"></b>' +
         '<button class="drawer__close" id="pickerClose" type="button" aria-label="Yopish"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>' +
         '<div class="cfg-picker__body" id="pickerBody"></div>' +
@@ -172,6 +177,7 @@
     renderSlots();
     renderSummary();
 
+    document.getElementById("cfgPicker").inert = true;
     document.getElementById("pickerClose").addEventListener("click", closePicker);
     document.getElementById("cfgPicker").addEventListener("click", function (e) {
       if (e.target.id === "cfgPicker") closePicker();
@@ -277,14 +283,24 @@
     });
 
     var p = document.getElementById("cfgPicker");
-    p.classList.add("is-open"); p.setAttribute("aria-hidden", "false");
+    p.classList.add("is-open"); p.setAttribute("aria-hidden", "false"); p.inert = false;
     document.body.style.overflow = "hidden";
+    var closeBtn = document.getElementById("pickerClose");
+    if (closeBtn) closeBtn.focus();
   }
   function closePicker() {
     var p = document.getElementById("cfgPicker");
-    p.classList.remove("is-open"); p.setAttribute("aria-hidden", "true");
+    p.classList.remove("is-open"); p.setAttribute("aria-hidden", "true"); p.inert = true;
     document.body.style.overflow = "";
   }
+
+  /* Escape bilan yopish */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      var p = document.getElementById("cfgPicker");
+      if (p && p.classList.contains("is-open")) closePicker();
+    }
+  });
 
   function specLine(c) {
     if (c.type === "cpu") return c.socket + " · " + c.ram + " · " + c.tdp + "W";
@@ -311,14 +327,20 @@
   /* ---------- Savatga qoʻshish ---------- */
   function addBuild() {
     var a = analyze(), L2 = L();
-    var parts = SLOTS.filter(function (s) { return sel[s]; }).map(function (s) { return get(s).name; });
+    var parts = SLOTS.map(function (s) { var c = get(s); return c ? c.name : null; }).filter(Boolean);
     var id = "build-" + Date.now();
-    // Sintetik mahsulot sifatida ro'yxatga qo'shamiz (savat uni topa olishi uchun)
-    window.UPG_DATA.products.push({
+    var build = {
       id: id, cat: "sborki", type: "pc",
       brand: "UPG", name: L2.buildName + " (" + parts.length + " " + L2.parts + ")", price: a.total
-    });
-    UPG.addToCart(id);
+    };
+    // Sintetik mahsulot sifatida ro'yxatga qo'shamiz (savat uni topa olishi uchun)
+    window.UPG_DATA.products.push(build);
+    // localStorage'da ham saqlaymiz — sahifa yangilanganda savat uni topa olsin
+    var saved;
+    try { saved = JSON.parse(localStorage.getItem("upg-builds")) || []; } catch (e) { saved = []; }
+    saved.push(build);
+    localStorage.setItem("upg-builds", JSON.stringify(saved));
+    UPG.addToCart(id, 1, true);
     UPG.toast(L2.added);
   }
 

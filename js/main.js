@@ -21,7 +21,7 @@ window.UPG = (function () {
       "n.parts": "Butlovchi qismlar",
       "n.builds": "Tayyor yigʻilmalar",
       "n.config": "PK Konfigurator",
-      "n.products": "Yangi mahsulotlar",
+      "n.products": "Ommabop mahsulotlar",
       "n.services": "Xizmatlar",
       "n.stores": "Doʻkonlar",
       "n.about": "Biz haqimizda",
@@ -181,6 +181,8 @@ window.UPG = (function () {
       "shop.qty": "Miqdor",
       "shop.notFound": "Mahsulot topilmadi",
       "shop.backHome": "Bosh sahifaga qaytish",
+      "shop.favs": "Sevimlilar",
+      "shop.favsEmpty": "Sevimlilar roʻyxati boʻsh",
       "spec.brand": "Brend",
       "spec.category": "Kategoriya",
       "spec.code": "Artikul",
@@ -206,7 +208,7 @@ window.UPG = (function () {
       "n.parts": "Комплектующие",
       "n.builds": "Готовые сборки",
       "n.config": "Конфигуратор ПК",
-      "n.products": "Новинки",
+      "n.products": "Популярные товары",
       "n.services": "Услуги",
       "n.stores": "Магазины",
       "n.about": "О нас",
@@ -364,6 +366,8 @@ window.UPG = (function () {
       "shop.qty": "Количество",
       "shop.notFound": "Товар не найден",
       "shop.backHome": "Вернуться на главную",
+      "shop.favs": "Избранное",
+      "shop.favsEmpty": "Список избранного пуст",
       "spec.brand": "Бренд",
       "spec.category": "Категория",
       "spec.code": "Артикул",
@@ -443,6 +447,22 @@ window.UPG = (function () {
   var cart = load("upg-cart");   // [{id, qty}]
   var favs = load("upg-favs");   // [id]
 
+  /* Konfiguratorda yigʻilgan shaxsiy yigʻilmalar — sahifalar aro saqlanadi */
+  if (window.UPG_DATA) {
+    load("upg-builds").forEach(function (b) {
+      if (b && b.id && !UPG_DATA.products.some(function (p) { return p.id === b.id; })) {
+        UPG_DATA.products.push(b);
+      }
+    });
+    var pruned = cart.filter(function (line) {
+      return UPG_DATA.products.some(function (p) { return p.id === line.id; });
+    });
+    if (pruned.length !== cart.length) {
+      cart = pruned;
+      localStorage.setItem("upg-cart", JSON.stringify(cart));
+    }
+  }
+
   function saveCart() { localStorage.setItem("upg-cart", JSON.stringify(cart)); updateBadges(); renderDrawer(); }
   function saveFavs() { localStorage.setItem("upg-favs", JSON.stringify(favs)); updateBadges(); }
 
@@ -456,14 +476,14 @@ window.UPG = (function () {
     return null;
   }
 
-  function addToCart(id, qty) {
+  function addToCart(id, qty, silent) {
     qty = qty || 1;
     var line = cart.filter(function (i) { return i.id === id; })[0];
     if (line) line.qty += qty; else cart.push({ id: id, qty: qty });
     saveCart();
     var badge = document.getElementById("cartBadge");
     if (badge) bump(badge);
-    toast(t("t.cart"));
+    if (!silent) toast(t("t.cart"));
   }
   function setQty(id, qty) {
     var line = cart.filter(function (i) { return i.id === id; })[0];
@@ -518,9 +538,10 @@ window.UPG = (function () {
     drawer.className = "drawer";
     drawer.id = "cartDrawer";
     drawer.setAttribute("aria-hidden", "true");
+    drawer.inert = true;
     drawer.innerHTML =
       '<div class="drawer__head">' +
-        '<b class="drawer__title" data-i18n="cart.title">Savat</b>' +
+        '<b class="drawer__title" data-i18n="cart.title">' + t("cart.title") + '</b>' +
         '<button class="drawer__close" type="button" aria-label="Yopish">' +
           '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
       '</div>' +
@@ -537,8 +558,8 @@ window.UPG = (function () {
     renderDrawer();
   }
 
-  function openCart() { drawer.classList.add("is-open"); overlay.classList.add("is-open"); drawer.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; }
-  function closeCart() { drawer.classList.remove("is-open"); overlay.classList.remove("is-open"); drawer.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
+  function openCart() { drawer.classList.add("is-open"); overlay.classList.add("is-open"); drawer.setAttribute("aria-hidden", "false"); drawer.inert = false; document.body.style.overflow = "hidden"; }
+  function closeCart() { drawer.classList.remove("is-open"); overlay.classList.remove("is-open"); drawer.setAttribute("aria-hidden", "true"); drawer.inert = true; document.body.style.overflow = ""; }
 
   function renderDrawer() {
     if (!drawerBody) return;
@@ -684,7 +705,7 @@ window.UPG = (function () {
         var idx = p.name.toLowerCase().indexOf(q);
         var hl = idx === -1 ? esc(p.name)
           : esc(p.name.slice(0, idx)) + "<mark>" + esc(p.name.slice(idx, idx + q.length)) + "</mark>" + esc(p.name.slice(idx + q.length));
-        return '<a class="search__sugg-item" href="product.html?id=' + p.id + '">' +
+        return '<a class="search__sugg-item" role="option" href="product.html?id=' + p.id + '">' +
           '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
           '<span>' + hl + '</span><small>' + fmt(p.price) + '</small></a>';
       }).join("");
@@ -796,6 +817,13 @@ window.UPG = (function () {
 
     var cartIcon = document.getElementById("cartIconBtn");
     if (cartIcon) cartIcon.addEventListener("click", openCart);
+
+    /* Sevimlilar tugmasi — sevimlilar sahifasiga olib boradi */
+    var favIcon = document.getElementById("favBtn");
+    if (favIcon) favIcon.addEventListener("click", function () { location.href = "category.html?fav=1"; });
+
+    /* Til oʻzgarganda savat oynasini qayta chizamiz */
+    document.addEventListener("upg:langchange", renderDrawer);
 
     /* Event delegation — savat/sevimli tugmalari (dinamik kartalar ham) */
     document.addEventListener("click", function (e) {
