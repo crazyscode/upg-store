@@ -210,7 +210,7 @@ window.UPG_ART = (function () {
     }
   };
 
-  return function (type, brand) {
+  var art = function (type, brand) {
     var u = ++uidc;
     var shape = SHAPES[type] || SHAPES.pc;
     return (
@@ -219,4 +219,33 @@ window.UPG_ART = (function () {
       '</svg>'
     );
   };
+
+  /* ---- Haqiqiy mahsulot fotosi ----
+     Fayllar: assets/products/<id>.webp, <id>-2.webp, <id>-3.webp
+     p.img — mavjud rasmlar soni (yoʻq boʻlsa SVG chizma ishlatiladi). */
+  art.src = function (id, n) {
+    return "assets/products/" + id + (n > 1 ? "-" + n : "") + ".webp";
+  };
+
+  /* eager=true — mahsulot sahifasining asosiy rasmi uchun (LCP) */
+  art.media = function (p, n, eager) {
+    if (!p.img) return art(p.type, p.brand);
+    return '<img class="art art--photo" src="' + esc(art.src(p.id, n || 1)) + '"' +
+      ' alt="' + esc(p.name) + '" decoding="async"' +
+      (eager ? '' : ' loading="lazy"') +
+      ' width="500" height="500" data-art-type="' + esc(p.type) + '"' +
+      ' data-art-brand="' + esc(p.brand) + '">';
+  };
+
+  /* Foto yuklanmasa — SVG chizmaga qaytamiz. error hodisasi koʻpaymaydi,
+     shuning uchun capture bosqichida ushlaymiz. */
+  document.addEventListener("error", function (e) {
+    var el = e.target;
+    if (!el || el.tagName !== "IMG" || !el.classList.contains("art--photo")) return;
+    if (el.dataset.artFallback) return;
+    el.dataset.artFallback = "1";
+    el.outerHTML = art(el.dataset.artType, el.dataset.artBrand);
+  }, true);
+
+  return art;
 })();
