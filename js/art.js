@@ -222,15 +222,28 @@ window.UPG_ART = (function () {
 
   /* ---- Haqiqiy mahsulot fotosi ----
      Fayllar: assets/products/<id>.webp, <id>-2.webp, <id>-3.webp
-     p.img — mavjud rasmlar soni (yoʻq boʻlsa SVG chizma ishlatiladi). */
+     p.img     — mavjud rasm fayllari soni
+     p.imgData — admin panel qoʻshgan mahsulotlar uchun data URL massivi
+                 (fayllar hali repoda yoʻq — eksport qilinmaguncha)
+     Ikkalasi ham boʻlmasa — SVG chizma. */
   art.src = function (id, n) {
     return "assets/products/" + id + (n > 1 ? "-" + n : "") + ".webp";
   };
 
+  art.count = function (p) {
+    return p.imgData && p.imgData.length ? p.imgData.length : (p.img || 0);
+  };
+
+  art.srcOf = function (p, n) {
+    n = n || 1;
+    if (p.imgData && p.imgData.length) return p.imgData[n - 1];
+    return art.src(p.id, n);
+  };
+
   /* eager=true — mahsulot sahifasining asosiy rasmi uchun (LCP) */
   art.media = function (p, n, eager) {
-    if (!p.img) return art(p.type, p.brand);
-    return '<img class="art art--photo" src="' + esc(art.src(p.id, n || 1)) + '"' +
+    if (!art.count(p)) return art(p.type, p.brand);
+    return '<img class="art art--photo" src="' + esc(art.srcOf(p, n)) + '"' +
       ' alt="' + esc(p.name) + '" decoding="async"' +
       (eager ? '' : ' loading="lazy"') +
       ' width="500" height="500" data-art-type="' + esc(p.type) + '"' +

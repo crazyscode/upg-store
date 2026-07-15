@@ -454,6 +454,15 @@ window.UPG = (function () {
         UPG_DATA.products.push(b);
       }
     });
+
+    /* Admin panel (admin.html) qoʻshgan mahsulotlar. Faqat shu brauzerda
+       koʻrinadi — saytga chiqishi uchun admin.html'dan eksport qilinib,
+       data.js va rasmlar commit qilinishi kerak. */
+    load("upg-admin-products").forEach(function (p) {
+      if (p && p.id && !UPG_DATA.products.some(function (x) { return x.id === p.id; })) {
+        UPG_DATA.products.push(p);
+      }
+    });
     var pruned = cart.filter(function (line) {
       return UPG_DATA.products.some(function (p) { return p.id === line.id; });
     });

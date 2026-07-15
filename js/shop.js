@@ -320,19 +320,20 @@
     /* Galereya: haqiqiy fotolar boʻlsa — asosiy rasm + kichik rasmlar,
        boʻlmasa — SVG chizma. */
     function gallery() {
-      if (!p.img) {
+      var n = UPG_ART.count(p);
+      if (!n) {
         return '<div class="pdp__media pdp__media--' + p.type + '" id="pdpMedia">' +
           UPG_ART(p.type, p.brand) + '</div>';
       }
       var thumbs = "";
-      for (var i = 1; i <= p.img; i++) {
+      for (var i = 1; i <= n; i++) {
         thumbs += '<button class="pdp__thumb pdp__media--' + p.type + (i === 1 ? " is-active" : "") +
           '" type="button" data-thumb="' + i + '" aria-label="' + i + '-rasm">' +
-          '<img src="' + UPG_ART.src(p.id, i) + '" alt="" loading="lazy" decoding="async"></button>';
+          '<img src="' + UPG_ART.srcOf(p, i) + '" alt="" loading="lazy" decoding="async"></button>';
       }
       return '<div class="pdp__media pdp__media--' + p.type + '" id="pdpMedia">' +
           UPG_ART.media(p, 1, true) + '</div>' +
-        (p.img > 1 ? '<div class="pdp__thumbs">' + thumbs + '</div>' : "");
+        (n > 1 ? '<div class="pdp__thumbs">' + thumbs + '</div>' : "");
     }
 
     wrap.innerHTML =
