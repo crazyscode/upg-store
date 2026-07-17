@@ -24,6 +24,23 @@
 .prod-card:hover .prod-card__media svg.art { transform: scale(1.06); }
 .pdp__media svg.art { width: 100%; height: 100%; stroke: none; }
 
+/* Haqiqiy mahsulot fotolari — shaffof fonli WebP, gradient ustiga tushadi.
+   Media qutilari flex (pastdagi .pdp__media qoidasiga ham qarang): grid'da
+   `place-items:center` satrni kontent boʻyicha oʻlchagani uchun rasmning
+   max-height foizi hal boʻlmay, 500px tabiiy oʻlchamiga qaytib ketardi. */
+.prod-card__media { display: flex; align-items: center; justify-content: center; }
+
+.prod-card__media img.art--photo,
+.pdp__media img.art--photo,
+.pdp__thumb img {
+  max-width: 100%; max-height: 100%; width: auto; height: auto;
+  object-fit: contain;
+}
+.prod-card__media img.art--photo { transition: transform .35s ease; }
+.prod-card:hover .prod-card__media img.art--photo { transform: scale(1.06); }
+.pdp__media img.art--photo { padding: 22px; }
+.pdp__thumb img { padding: 7px; }
+
 /* ---------- Sahifa umumiy ---------- */
 .page { padding: 30px 0 90px; min-height: 60vh; }
 
@@ -136,7 +153,7 @@
 .pdp__gallery { position: relative; }
 .pdp__badge { top: 18px; left: 18px; }
 .pdp__media {
-  height: 420px; display: grid; place-items: center;
+  height: 420px; display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--border); border-radius: var(--radius);
 }
 .pdp__media svg { width: 180px; height: 180px; stroke-width: 1; }
@@ -145,6 +162,7 @@
   width: 84px; height: 84px; display: grid; place-items: center;
   border: 1px solid var(--border); border-radius: 12px; cursor: pointer;
   transition: border-color .2s;
+  padding: 0; overflow: hidden;
 }
 .pdp__thumb svg { width: 40px; height: 40px; }
 .pdp__thumb.is-active { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(255,0,150,.2); }

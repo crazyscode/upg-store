@@ -153,11 +153,20 @@ body.loaded .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
 /* ---------- Header ---------- */
 .header {
   position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+
+/* Fon va blur ataylab alohida qatlamda turadi.
+   backdrop-filter to'g'ridan-to'g'ri .header'da bo'lsa, u o'zining
+   position:fixed avlodlari uchun containing block yaratadi — natijada
+   burger bilan ochiladigan mobil menyu (.subnav.is-open) viewport pastiga
+   emas, header pastiga yopishib, ekrandan yuqoriga chiqib ketadi. */
+.header::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-  transition: box-shadow 0.3s;
 }
 .header.is-scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25); }
 

@@ -53,7 +53,7 @@
         '<button class="prod-card__fav' + favCls + '" data-fav="' + p.id + '" type="button" aria-label="Sevimlilar">' +
           '<svg viewBox="0 0 24 24"' + favStyle + '><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>' +
         '</button>' +
-        '<a class="prod-card__media prod-card__media--' + p.type + '" href="product.html?id=' + p.id + '">' + UPG_ART(p.type, p.brand) + '</a>' +
+        '<a class="prod-card__media prod-card__media--' + p.type + '" href="product.html?id=' + p.id + '">' + UPG_ART.media(p) + '</a>' +
         '<div class="prod-card__body">' +
           '<span class="prod-card__cat">' + esc(p.brand) + '</span>' +
           '<h3 class="prod-card__name"><a href="product.html?id=' + p.id + '">' + esc(p.name) + '</a></h3>' +
@@ -317,6 +317,25 @@
     var favCls = UPG.isFav(p.id) ? " is-fav" : "";
     var favStyle = UPG.isFav(p.id) ? ' style="fill:var(--secondary)"' : "";
 
+    /* Galereya: haqiqiy fotolar boʻlsa — asosiy rasm + kichik rasmlar,
+       boʻlmasa — SVG chizma. */
+    function gallery() {
+      var n = UPG_ART.count(p);
+      if (!n) {
+        return '<div class="pdp__media pdp__media--' + p.type + '" id="pdpMedia">' +
+          UPG_ART(p.type, p.brand) + '</div>';
+      }
+      var thumbs = "";
+      for (var i = 1; i <= n; i++) {
+        thumbs += '<button class="pdp__thumb pdp__media--' + p.type + (i === 1 ? " is-active" : "") +
+          '" type="button" data-thumb="' + i + '" aria-label="' + i + '-rasm">' +
+          '<img src="' + UPG_ART.srcOf(p, i) + '" alt="" loading="lazy" decoding="async"></button>';
+      }
+      return '<div class="pdp__media pdp__media--' + p.type + '" id="pdpMedia">' +
+          UPG_ART.media(p, 1, true) + '</div>' +
+        (n > 1 ? '<div class="pdp__thumbs">' + thumbs + '</div>' : "");
+    }
+
     wrap.innerHTML =
       '<nav class="breadcrumb">' +
         '<a href="index.html">' + UPG.t("shop.home") + '</a><span>/</span>' +
@@ -327,12 +346,7 @@
       '<div class="pdp">' +
         '<div class="pdp__gallery">' +
           (p.old ? '<span class="badge badge--sale pdp__badge">−' + disc + '%</span>' : "") +
-          '<div class="pdp__media pdp__media--' + p.type + '">' + UPG_ART(p.type, p.brand) + '</div>' +
-          '<div class="pdp__thumbs">' +
-            '<span class="pdp__thumb is-active pdp__media--' + p.type + '">' + iconSVG(p.type) + '</span>' +
-            '<span class="pdp__thumb pdp__media--' + p.type + '">' + iconSVG(p.type) + '</span>' +
-            '<span class="pdp__thumb pdp__media--' + p.type + '">' + iconSVG(p.type) + '</span>' +
-          '</div>' +
+          gallery() +
         '</div>' +
         '<div class="pdp__info">' +
           '<span class="pdp__brand">' + esc(p.brand) + '</span>' +
@@ -389,6 +403,16 @@
       });
     });
     document.getElementById("pdpAdd").addEventListener("click", function () { UPG.addToCart(p.id, qty); });
+
+    /* Galereya — kichik rasmni bosganda asosiysi almashadi */
+    var thumbBtns = wrap.querySelectorAll("[data-thumb]");
+    thumbBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        thumbBtns.forEach(function (x) { x.classList.remove("is-active"); });
+        b.classList.add("is-active");
+        document.getElementById("pdpMedia").innerHTML = UPG_ART.media(p, +b.dataset.thumb);
+      });
+    });
 
     /* Tavsiya — shu kategoriyadan */
     var related = D.products.filter(function (x) { return x.cat === p.cat && x.id !== p.id; }).slice(0, 4);

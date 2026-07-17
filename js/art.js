@@ -210,7 +210,7 @@ window.UPG_ART = (function () {
     }
   };
 
-  return function (type, brand) {
+  var art = function (type, brand) {
     var u = ++uidc;
     var shape = SHAPES[type] || SHAPES.pc;
     return (
@@ -219,4 +219,46 @@ window.UPG_ART = (function () {
       '</svg>'
     );
   };
+
+  /* ---- Haqiqiy mahsulot fotosi ----
+     Fayllar: assets/products/<id>.webp, <id>-2.webp, <id>-3.webp
+     p.img     — mavjud rasm fayllari soni
+     p.imgData — admin panel qoʻshgan mahsulotlar uchun data URL massivi
+                 (fayllar hali repoda yoʻq — eksport qilinmaguncha)
+     Ikkalasi ham boʻlmasa — SVG chizma. */
+  art.src = function (id, n) {
+    return "assets/products/" + id + (n > 1 ? "-" + n : "") + ".webp";
+  };
+
+  art.count = function (p) {
+    return p.imgData && p.imgData.length ? p.imgData.length : (p.img || 0);
+  };
+
+  art.srcOf = function (p, n) {
+    n = n || 1;
+    if (p.imgData && p.imgData.length) return p.imgData[n - 1];
+    return art.src(p.id, n);
+  };
+
+  /* eager=true — mahsulot sahifasining asosiy rasmi uchun (LCP) */
+  art.media = function (p, n, eager) {
+    if (!art.count(p)) return art(p.type, p.brand);
+    return '<img class="art art--photo" src="' + esc(art.srcOf(p, n)) + '"' +
+      ' alt="' + esc(p.name) + '" decoding="async"' +
+      (eager ? '' : ' loading="lazy"') +
+      ' width="500" height="500" data-art-type="' + esc(p.type) + '"' +
+      ' data-art-brand="' + esc(p.brand) + '">';
+  };
+
+  /* Foto yuklanmasa — SVG chizmaga qaytamiz. error hodisasi koʻpaymaydi,
+     shuning uchun capture bosqichida ushlaymiz. */
+  document.addEventListener("error", function (e) {
+    var el = e.target;
+    if (!el || el.tagName !== "IMG" || !el.classList.contains("art--photo")) return;
+    if (el.dataset.artFallback) return;
+    el.dataset.artFallback = "1";
+    el.outerHTML = art(el.dataset.artType, el.dataset.artBrand);
+  }, true);
+
+  return art;
 })();

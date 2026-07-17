@@ -194,7 +194,22 @@ window.UPG = (function () {
       "cart.emptyBtn": "Katalogga oʻtish",
       "cart.total": "Jami:",
       "cart.checkout": "Buyurtma berish",
-      "cart.clear": "Savatni tozalash"
+      "cart.clear": "Savatni tozalash",
+      /* mobil ilova (PWA) */
+      "tab.home": "Bosh sahifa",
+      "tab.catalog": "Katalog",
+      "tab.cart": "Savat",
+      "tab.favs": "Sevimlilar",
+      "app.installTitle": "UPG ilovasini oʻrnating",
+      "app.installText": "Bosh ekrandan bir bosishda oching — tezroq va oflayn ham ishlaydi.",
+      "app.installBtn": "Oʻrnatish",
+      "app.later": "Keyinroq",
+      "app.iosTitle": "Bosh ekranga qoʻshing",
+      "app.iosText": "Pastdagi «Ulashish» tugmasini bosing, soʻng «Bosh ekranga qoʻshish» ni tanlang.",
+      "app.updateTitle": "Yangi versiya tayyor",
+      "app.updateBtn": "Yangilash",
+      "app.offline": "Internet yoʻq — oflayn rejim",
+      "app.online": "Ulanish tiklandi"
     },
     ru: {
       "meta.title": "UPG — Игровая и компьютерная техника | Ташкент",
@@ -378,7 +393,22 @@ window.UPG = (function () {
       "cart.emptyBtn": "Перейти в каталог",
       "cart.total": "Итого:",
       "cart.checkout": "Оформить заказ",
-      "cart.clear": "Очистить корзину"
+      "cart.clear": "Очистить корзину",
+      /* мобильное приложение (PWA) */
+      "tab.home": "Главная",
+      "tab.catalog": "Каталог",
+      "tab.cart": "Корзина",
+      "tab.favs": "Избранное",
+      "app.installTitle": "Установите приложение UPG",
+      "app.installText": "Открывайте с главного экрана в одно касание — быстрее и работает офлайн.",
+      "app.installBtn": "Установить",
+      "app.later": "Позже",
+      "app.iosTitle": "Добавьте на главный экран",
+      "app.iosText": "Нажмите кнопку «Поделиться» внизу, затем выберите «На экран «Домой»».",
+      "app.updateTitle": "Доступна новая версия",
+      "app.updateBtn": "Обновить",
+      "app.offline": "Нет интернета — офлайн-режим",
+      "app.online": "Соединение восстановлено"
     }
   };
 
@@ -454,6 +484,15 @@ window.UPG = (function () {
         UPG_DATA.products.push(b);
       }
     });
+
+    /* Admin panel (admin.html) qoʻshgan mahsulotlar. Faqat shu brauzerda
+       koʻrinadi — saytga chiqishi uchun admin.html'dan eksport qilinib,
+       data.js va rasmlar commit qilinishi kerak. */
+    load("upg-admin-products").forEach(function (p) {
+      if (p && p.id && !UPG_DATA.products.some(function (x) { return x.id === p.id; })) {
+        UPG_DATA.products.push(p);
+      }
+    });
     var pruned = cart.filter(function (line) {
       return UPG_DATA.products.some(function (p) { return p.id === line.id; });
     });
@@ -512,10 +551,23 @@ window.UPG = (function () {
   }
 
   function updateBadges() {
+    var n = cartQty();
+    var f = favs.length;
+
     var cb = document.getElementById("cartBadge");
     var fb = document.getElementById("favBadge");
-    if (cb) cb.textContent = cartQty();
-    if (fb) fb.textContent = favs.length;
+    if (cb) cb.textContent = n;
+    if (fb) fb.textContent = f;
+
+    /* Mobil ilova tab-bar'idagi badge'lar (app.js inject qiladi).
+       Nol boʻlsa yashiriladi — ilovalarda odatiy xulq. */
+    document.querySelectorAll('[data-badge="cart"]').forEach(function (el) { setBadge(el, n); });
+    document.querySelectorAll('[data-badge="fav"]').forEach(function (el) { setBadge(el, f); });
+  }
+
+  function setBadge(el, n) {
+    el.textContent = n > 99 ? "99+" : String(n);
+    el.hidden = n === 0;
   }
 
   function bump(badge) {
@@ -862,11 +914,13 @@ window.UPG = (function () {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  /* Public API (shop.js uchun) */
+  /* Public API (shop.js va app.js uchun) */
   return {
     t: t, fmt: fmt, esc: esc, iconSVG: iconSVG,
     lang: function () { return currentLang; },
     addToCart: addToCart, toggleFav: toggleFav, isFav: isFav,
-    openCart: openCart, toast: toast
+    openCart: openCart, closeCart: closeCart, toast: toast,
+    /* app.js tab-bar'ni inject qilgach badge'larni tiklaydi */
+    syncBadges: updateBadges
   };
 })();
