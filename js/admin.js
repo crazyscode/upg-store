@@ -477,7 +477,10 @@
     $("expData").addEventListener("click", function () {
       $("expErr").textContent = "";
       if (!items.length) { $("expErr").textContent = "Avval mahsulot qoʻshing."; return; }
-      fetch("js/data.js")
+      /* cache: "reload" — eksport DOIM diskdagi joriy data.js ga asoslanishi
+         shart. Service worker keshdan eski nusxani bersa, qoʻlda kiritilgan
+         oʻzgarishlar eksportda jimgina yoʻqolardi (sw.js buni koʻrib chetlab oʻtadi). */
+      fetch("js/data.js", { cache: "reload" })
         .then(function (r) {
           if (!r.ok) throw new Error("data.js oʻqilmadi (" + r.status + ")");
           return r.text();

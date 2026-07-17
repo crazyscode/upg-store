@@ -14,27 +14,60 @@
 - Dark / Light rejim
 - Jonli qidiruv, kun taklifi taymeri
 - Toʻliq adaptiv (mobil / planshet / desktop)
+- **Mobil ilova (PWA)** — telefonga oʻrnatiladi, oflayn ishlaydi, pastki tab-bar
+
+## Mobil ilova (PWA)
+
+Sayt telefonga **oʻrnatiladigan ilova** sifatida ishlaydi — alohida kodbaza yoʻq,
+xuddi shu fayllar.
+
+- **Oʻrnatish** — Android/desktop Chrome'da 3 soniyadan keyin «Ilovani oʻrnating»
+  banneri chiqadi. iOS Safari'da `beforeinstallprompt` yoʻq, shuning uchun
+  «Ulashish → Bosh ekranga qoʻshish» yoʻriqnomasi koʻrsatiladi. Rad etilsa
+  14 kun qayta soʻralmaydi (`upg-install-dismissed`).
+- **Pastki tab-bar** — Bosh sahifa / Katalog / Savat / Sevimlilar, badge'lar bilan.
+  Mobil kenglikda (≤860px) va ilova rejimida koʻrinadi; `js/app.js` uni barcha
+  sahifalarga inject qiladi.
+- **Ilova rejimi** (`display: standalone`) — topbar va anker menyu yashiriladi,
+  til almashtirgich header'ga koʻchadi, safe-area (notch / home indicator) hisobga
+  olinadi.
+- **Oflayn** — app shell precache qilinadi; koʻrilgan mahsulot rasmlari keshda
+  saqlanadi (eng koʻpi 180 ta fayl). Keshda yoʻq sahifa `offline.html` ga tushadi.
+- **Yangilanish** — yangi versiya chiqqanda «Yangilash» tugmasi bilan xabar
+  koʻrsatiladi (majburiy qayta yuklash yoʻq).
+
+> **Deploy qilishda muhim:** `sw.js` ichidagi `VERSION` ni har safar oshiring
+> (`v2` → `v3` …). Aks holda eski kesh yozuvlari tozalanmay qolib ketadi.
+
+Admin panel (`admin.html`) ataylab PWA'dan tashqarida — u lokal vosita, oflayn
+kerak emas.
 
 ## Texnologiya
 
 Sof statik sayt — HTML + CSS + Vanilla JavaScript. Build talab qilinmaydi.
 
 ```
-index.html          — bosh sahifa
+index.html          — bosh sahifa (PWA start_url, iOS splash ekranlari shu yerda)
 category.html       — kategoriya sahifasi (dinamik)
 product.html        — mahsulot sahifasi (dinamik)
 configurator.html   — PK konfigurator sahifasi
 admin.html          — admin panel (mahsulot qoʻshish)
+offline.html        — oflayn sahifa (tashqi resurssiz, mustaqil)
+manifest.webmanifest— PWA manifesti (nom, ikonka, yorliqlar)
+sw.js               — service worker (kesh, oflayn, yangilanish)
 css/style.css       — asosiy dizayn
 css/shop.css        — doʻkon va konfigurator sahifalari
+css/app.css         — mobil ilova qobigʻi (tab-bar, standalone, banner)
 css/admin.css       — admin panel
 js/data.js          — mahsulotlar bazasi
 js/main.js          — header, savat, til, mavzu
 js/art.js           — mahsulot rasmi / SVG illyustratsiya
 js/shop.js          — kategoriya/mahsulot render
 js/configurator.js  — PK konfigurator (moslik tekshiruvi)
+js/app.js           — PWA qobigʻi (SW, tab-bar, oʻrnatish, yangilanish)
 js/admin.js         — admin panel (forma, rasm, eksport)
 assets/products/    — mahsulot fotolari (<id>.webp, <id>-2.webp, <id>-3.webp)
+assets/icons/       — ilova ikonkalari va iOS launch ekranlari
 ```
 
 ## Lokal ishga tushirish
@@ -43,6 +76,10 @@ assets/products/    — mahsulot fotolari (<id>.webp, <id>-2.webp, <id>-3.webp)
 python -m http.server 8000
 # so'ng brauzerda: http://localhost:8000
 ```
+
+Service worker `localhost`da ham ishlaydi, shuning uchun PWA'ni shu yerda toʻliq
+sinash mumkin (DevTools → Application → Service Workers / Manifest). Faylni
+`file://` orqali ochsangiz SW roʻyxatdan oʻtmaydi — bu normal.
 
 ## Admin panel — yangi mahsulot qoʻshish
 
@@ -75,3 +112,7 @@ Statik sayt boʻlgani uchun istalgan hostingga joylashadi:
 - **GitHub Pages** — `main` branchga push qilinganda `.github/workflows/deploy.yml` avtomatik deploy qiladi (Settings → Pages → Source: **GitHub Actions** boʻlishi kerak)
 - **Vercel** — `vercel deploy` (yoki repo'ni ulang)
 - **Netlify** — papkani [netlify.com/drop](https://app.netlify.com/drop) ga tashlang
+
+PWA oʻrnatilishi uchun **HTTPS shart** — yuqoridagi uchala hosting ham buni oʻzi
+taʼminlaydi. Barcha yoʻllar nisbiy, shuning uchun ilova subpath'da
+(`…/upg-store/`) ham, domen ildizida ham ishlaydi.

@@ -1,0 +1,65 @@
+{
+  "name": "UPG — Gaming va kompyuter texnikasi",
+  "short_name": "UPG",
+  "description": "Oʻzbekistondagi eng yirik gaming va kompyuter texnikasi doʻkoni. Videokartalar, protsessorlar, tayyor yigʻilmalar va PK konfigurator.",
+  "lang": "uz",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "theme_color": "#0f0f0f",
+  "background_color": "#070709",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Katalog",
+      "short_name": "Katalog",
+      "description": "Barcha mahsulotlar",
+      "url": "category.html?cat=all",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Savat",
+      "short_name": "Savat",
+      "description": "Savatdagi mahsulotlar",
+      "url": "index.html?open=cart",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "PK Konfigurator",
+      "short_name": "Konfigurator",
+      "description": "Oʻz kompyuteringizni yigʻing",
+      "url": "configurator.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

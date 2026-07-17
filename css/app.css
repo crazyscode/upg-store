@@ -1,0 +1,517 @@
+/* ============================================================
+   UPG — mobil ilova qobigʻi (PWA)
+
+   Bu fayl saytning desktop koʻrinishiga tegmaydi. Ichidagi hamma narsa
+   yo mobil kenglikda (<=860px), yo standalone rejimda (ilova sifatida
+   ochilganda) faollashadi.
+
+   html[data-standalone="true"] — ilova sifatida ochilgan (brauzer chrome'i yoʻq).
+   Buni app.js oʻrnatadi; boshqa hamma narsa (jumladan tab-bar koʻrinishi)
+   shu yerdagi --tabbar-h oʻzgaruvchisi orqali hal boʻladi.
+   ============================================================ */
+
+:root {
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+
+  --tabbar-base: 62px;      /* tugmalar zonasi balandligi */
+
+  /* --tabbar-h — tab-bar egallagan toʻliq joy (safe-area bilan).
+     0 = tab-bar yoʻq. Quyidagi barcha siljitishlar shunga tayanadi.
+     --netbar-safe — oflayn indikatori pastda safe-area'ni oʻzi qoplashi
+     kerakmi (tab-bar boʻlsa, uni tab-bar qoplaydi).
+
+     Ataylab CSS'da, JS'da emas: JS listener'iga bogʻlansa, oyna oʻlchami
+     oʻzgarganda holat eskirib qolishi mumkin — bu amalda kuzatildi. */
+  --tabbar-h: 0px;
+  --netbar-safe: var(--safe-b);
+}
+
+/* Tab-bar — mobil naqsh: tor ekran yoki ilova rejimi.
+   Desktop brauzerda uning oʻrni yoʻq (u yerda header navigatsiyasi bor).
+   Koʻrinish sharti faqat shu ikki joyda — boshqa hech qayerda takrorlanmaydi. */
+@media (max-width: 860px) {
+  :root {
+    --tabbar-h: calc(var(--tabbar-base) + var(--safe-b));
+    --netbar-safe: 0px;
+  }
+}
+
+/* Ilova rejimida kenglikdan qatʼi nazar — brauzer chrome'i yoʻq,
+   navigatsiya faqat tab-bar orqali */
+html[data-standalone="true"] {
+  --tabbar-h: calc(var(--tabbar-base) + var(--safe-b));
+  --netbar-safe: 0px;
+}
+
+/* ============================================================
+   Pastki tab-bar
+   ============================================================ */
+.tabbar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  display: none;                       /* quyida tor ekran / ilova rejimida yoqiladi */
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: stretch;
+
+  padding-bottom: var(--safe-b);       /* iPhone home indicator uchun */
+  border-top: 1px solid var(--border);
+
+  /* Eski brauzerlar color-mix'ni tushunmaydi — avval qattiq rang beramiz */
+  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--bg-alt) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+}
+
+/* backdrop-filter yoʻq brauzerlarda yarim shaffof fon matnni oʻqishni buzadi */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tabbar { background: var(--bg-alt); }
+}
+
+@media (max-width: 860px) { .tabbar { display: grid; } }
+html[data-standalone="true"] .tabbar { display: grid; }
+
+/* Tab-bar kontentni bekitmasligi uchun sahifa oxiriga joy qoldiramiz.
+   Tab-bar yoʻq boʻlsa --tabbar-h: 0 — desktopda hech narsa oʻzgarmaydi. */
+body { padding-bottom: var(--tabbar-h); }
+
+.tabbar__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+
+  min-height: var(--tabbar-base);
+  padding: 8px 4px 7px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  text-decoration: none;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.18s ease;
+}
+
+.tabbar__item svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 1.7;
+  transition: transform 0.18s ease;
+}
+
+.tabbar__item:active svg { transform: scale(0.86); }
+
+.tabbar__item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -3px;
+  border-radius: 8px;
+}
+
+/* Faol tab — brend rangi. Ikonka global `svg { stroke: currentColor }` orqali
+   oʻzi ergashadi, alohida qoida shart emas. */
+.tabbar__item.is-active { color: var(--primary); }
+
+/* Light mavzuda brend pushtisi (#FF0096) tab-bar foni (#f4f5f7) ustida atigi
+   3.38:1 beradi — 10.5px yorliq uchun WCAG AA (4.5:1) dan past. Shu bitta
+   joyda toʻqroq magenta ishlatamiz (4.82:1); gradient indikator va badge
+   brend ranglarida qoladi. */
+[data-theme="light"] .tabbar__item.is-active { color: #D1007B; }
+
+/* Faol tab ustidagi kichik indikator */
+.tabbar__item.is-active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--grad);
+}
+
+.tabbar__label {
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Badge — savat / sevimlilar soni */
+.tabbar__badge {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  margin-left: 5px;
+
+  display: grid;
+  place-items: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+
+  border-radius: 9px;
+  background: var(--grad);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  /* 0 boʻlsa koʻrinmaydi — JS hidden atributi bilan boshqaradi */
+  pointer-events: none;
+}
+
+.tabbar__badge[hidden] { display: none; }
+
+/* ============================================================
+   Standalone rejim — brauzer chrome'i yoʻq, ilovaga oʻxshaydi
+   ============================================================ */
+
+/* Sayt chrome'i ilovada keraksiz: manzil / ish vaqti / telefon */
+html[data-standalone="true"] .topbar { display: none; }
+
+/* Anker menyu ham yashiriladi — uning oʻrnini tab-bar egallaydi.
+   Lekin burger bilan ochilganda (.is-open) koʻrinishi shart, aks holda
+   "Xizmatlar", "Doʻkonlar" kabi boʻlimlarga yoʻl qolmaydi. */
+html[data-standalone="true"] .subnav:not(.is-open) { display: none; }
+
+/* Shu sababli burger standalone'da har qanday kenglikda koʻrinadi */
+html[data-standalone="true"] .burger { display: flex; }
+
+/* Header — status bar ostiga tushib qolmasin */
+html[data-standalone="true"] .header {
+  padding-top: var(--safe-t);
+}
+
+/* ---- Tab-bar bilan toʻqnashadigan mavjud elementlarni koʻtaramiz ----
+   Bularning barchasi style.css'da pastga (bottom: 24-26px) mahkamlangan —
+   tab-bar ularni bekitib qoʻyadi.
+
+   max() ataylab: tab-bar yoʻq boʻlganda (--tabbar-h: 0) style.css'dagi
+   asl qiymat kuchida qoladi, bor boʻlganda esa uning ustiga koʻtariladi. */
+
+/* "Yuqoriga qaytish" tugmasi (asli: 26px) */
+.to-top {
+  bottom: max(26px, calc(var(--tabbar-h) + 14px));
+}
+
+/* Toast xabarlari — savatga qoʻshildi va h.k. (asli: 24px) */
+.toast-wrap {
+  bottom: max(24px, calc(var(--tabbar-h) + 16px));
+}
+
+/* Burger bilan ochiladigan mobil menyu — tab-bar ustidan boshlansin,
+   aks holda menyu tab-bar'ni bekitadi va yopib boʻlmay qoladi (asli: 0) */
+.subnav.is-open {
+  bottom: var(--tabbar-h);
+}
+
+/* Savat oynasi (drawer) allaqachon z-index: 195 — tab-bar (60) ustida.
+   Tegmaymiz. */
+
+/* Ilovada rezina-scroll (pull-to-refresh) oʻchiriladi */
+html[data-standalone="true"],
+html[data-standalone="true"] body {
+  overscroll-behavior-y: none;
+}
+
+/* Ilovada matnni uzoq bosganda tanlanish menyusi chiqmasin —
+   lekin input va matn bloklarida tanlash kerak */
+html[data-standalone="true"] .tabbar,
+html[data-standalone="true"] .header,
+html[data-standalone="true"] .btn {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Til almashtirgich standalone'da header'ga koʻchiriladi (JS qiladi) */
+.header__actions .lang-switch {
+  margin-left: 2px;
+}
+
+@media (max-width: 420px) {
+  /* Eng tor ekranlarda til tugmalari joy yeydi — ixchamlashtiramiz */
+  .header__actions .lang-switch__btn {
+    padding-inline: 7px;
+    font-size: 11px;
+  }
+}
+
+/* ============================================================
+   Pastki varaq (sheet) — oʻrnatish taklifi / iOS yoʻriqnomasi
+   ============================================================ */
+.sheet {
+  position: fixed;
+  /* Keng ekranda — pastki oʻng burchakda ixcham panel */
+  left: auto;
+  right: 16px;
+  max-width: 380px;
+  bottom: max(16px, calc(var(--tabbar-h) + 12px));
+  z-index: 70;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 15px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+
+  transform: translateY(calc(100% + 24px));
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.28s ease,
+              visibility 0s linear 0.38s;
+}
+
+/* Tor ekranda — butun kenglik boʻylab */
+@media (max-width: 860px) {
+  .sheet { left: 12px; right: 12px; max-width: none; }
+}
+
+.sheet.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.sheet__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.sheet__icon img { width: 100%; height: 100%; }
+
+.sheet__body { flex: 1; min-width: 0; }
+
+.sheet__title {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.sheet__text {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.sheet__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.sheet__btn {
+  min-height: 36px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 9px;
+  background: var(--grad);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.sheet__btn:active { transform: scale(0.97); }
+
+.sheet__later {
+  min-height: 36px;
+  padding: 0 11px;
+  border: none;
+  border-radius: 9px;
+  background: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sheet__later:hover { color: var(--text); }
+
+.sheet__close {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -4px 0 0;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.sheet__close svg { width: 15px; height: 15px; }
+.sheet__close:hover { color: var(--text); background: var(--card-2); }
+
+.sheet__btn:focus-visible,
+.sheet__later:focus-visible,
+.sheet__close:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* iOS yoʻriqnomasi — pastdagi "Ulashish" tugmasiga ishora qiluvchi oʻq */
+.sheet--ios::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 15px;
+  height: 15px;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   Yangilanish xabari
+   ============================================================ */
+.appbar {
+  position: fixed;
+  left: auto;
+  right: 16px;
+  max-width: 380px;
+  bottom: max(16px, calc(var(--tabbar-h) + 12px));
+  z-index: 71;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 11px 11px 15px;
+
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+
+  transform: translateY(calc(100% + 24px));
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.28s ease,
+              visibility 0s linear 0.38s;
+}
+
+@media (max-width: 860px) {
+  .appbar { left: 12px; right: 12px; max-width: none; }
+}
+
+.appbar.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.appbar__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--grad);
+}
+
+.appbar__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.appbar__btn {
+  flex-shrink: 0;
+  min-height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 9px;
+  background: var(--grad);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.appbar__btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Oflayn indikatori
+   ============================================================ */
+/* Ataylab PASTDA: tepada u sticky header (z-index: 100) bilan bir joyda
+   turadi — ustiga chiqsa header'ning tepasini oflayn davomida doimiy
+   bekitadi, ostiga tushsa umuman koʻrinmaydi. Pastda esa hech narsa bilan
+   toʻqnashmaydi va ilova uslubiga ham mos. */
+.netbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--tabbar-h);          /* tab-bar yoʻq boʻlsa 0 */
+  z-index: 72;                      /* sheet (70) va appbar (71) ustida */
+
+  /* Tab-bar boʻlsa u safe-area'ni oʻzi qoplaydi (--netbar-safe: 0),
+     boʻlmasa netbar eng pastki element — safe-area'ni oʻzi qoplaydi */
+  padding: 7px 12px calc(7px + var(--netbar-safe));
+
+  background: #1c1c22;
+  color: #fcfcfc;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+[data-theme="light"] .netbar {
+  background: #2a2a32;
+  color: #fff;
+}
+
+.netbar.is-open { transform: translateY(0); }
+.netbar.is-ok { background: #12923a; }
+
+/* ============================================================
+   Harakatni kamaytirish
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .tabbar__item,
+  .tabbar__item svg,
+  .sheet,
+  .appbar,
+  .netbar,
+  .sheet__btn {
+    transition: none;
+  }
+}
