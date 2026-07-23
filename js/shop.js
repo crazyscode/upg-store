@@ -1,17 +1,17 @@
 /* ============================================================
-   UPG — doʻkon logikasi (kategoriya, mahsulot, tavsiya)
+   Togi DB — doʻkon logikasi (kategoriya, mahsulot, tavsiya)
    ============================================================ */
 
 (function () {
   "use strict";
 
-  var D = window.UPG_DATA;
-  var esc = UPG.esc, iconSVG = UPG.iconSVG;
+  var D = window.TOGIDB_DATA;
+  var esc = TOGIDB.esc, iconSVG = TOGIDB.iconSVG;
 
-  function sumWord() { return UPG.t("common.sum"); }
+  function sumWord() { return TOGIDB.t("common.sum"); }
   function catName(slug) {
     var c = catBySlug(slug);
-    return c ? c[UPG.lang()] || c.uz : slug;
+    return c ? c[TOGIDB.lang()] || c.uz : slug;
   }
   function catBySlug(slug) {
     for (var i = 0; i < D.categories.length; i++) if (D.categories[i].slug === slug) return D.categories[i];
@@ -43,9 +43,9 @@
     var disc = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
     var badge = p.old
       ? '<span class="badge badge--sale">−' + disc + '%</span>'
-      : (p.nw ? '<span class="badge badge--new">' + UPG.t("badge.new") + '</span>' : "");
-    var favCls = UPG.isFav(p.id) ? " is-fav" : "";
-    var favStyle = UPG.isFav(p.id) ? ' style="fill:var(--secondary)"' : "";
+      : (p.nw ? '<span class="badge badge--new">' + TOGIDB.t("badge.new") + '</span>' : "");
+    var favCls = TOGIDB.isFav(p.id) ? " is-fav" : "";
+    var favStyle = TOGIDB.isFav(p.id) ? ' style="fill:var(--secondary)"' : "";
     var r = ratingFor(p.id);
     return (
       '<article class="prod-card is-visible">' +
@@ -53,7 +53,7 @@
         '<button class="prod-card__fav' + favCls + '" data-fav="' + p.id + '" type="button" aria-label="Sevimlilar">' +
           '<svg viewBox="0 0 24 24"' + favStyle + '><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg>' +
         '</button>' +
-        '<a class="prod-card__media prod-card__media--' + p.type + '" href="product.html?id=' + p.id + '">' + UPG_ART.media(p) + '</a>' +
+        '<a class="prod-card__media prod-card__media--' + p.type + '" href="product.html?id=' + p.id + '">' + TOGIDB_ART.media(p) + '</a>' +
         '<div class="prod-card__body">' +
           '<span class="prod-card__cat">' + esc(p.brand) + '</span>' +
           '<h3 class="prod-card__name"><a href="product.html?id=' + p.id + '">' + esc(p.name) + '</a></h3>' +
@@ -116,8 +116,8 @@
       return (
         '<a class="cat-card" href="category.html?cat=' + c.slug + '">' +
           '<div class="cat-card__icon">' + iconSVG(c.icon) + '</div>' +
-          '<b data-catname="' + c.slug + '">' + (c[UPG.lang()] || c.uz) + '</b>' +
-          '<span data-catcount="' + c.slug + '">' + count + ' ' + UPG.t("shop.results") + '</span>' +
+          '<b data-catname="' + c.slug + '">' + (c[TOGIDB.lang()] || c.uz) + '</b>' +
+          '<span data-catcount="' + c.slug + '">' + count + ' ' + TOGIDB.t("shop.results") + '</span>' +
         '</a>'
       );
     }).join("");
@@ -131,8 +131,8 @@
       var count = D.products.filter(function (p) { return p.cat === c.slug; }).length;
       return (
         '<a class="mega__link" href="category.html?cat=' + c.slug + '">' + iconSVG(c.icon) +
-          '<span><b data-catname="' + c.slug + '">' + (c[UPG.lang()] || c.uz) + '</b>' +
-          '<i data-catcount="' + c.slug + '">' + count + ' ' + UPG.t("shop.results") + '</i></span></a>'
+          '<span><b data-catname="' + c.slug + '">' + (c[TOGIDB.lang()] || c.uz) + '</b>' +
+          '<i data-catcount="' + c.slug + '">' + count + ' ' + TOGIDB.t("shop.results") + '</i></span></a>'
       );
     }).join("");
   }
@@ -154,15 +154,15 @@
     var cat = catBySlug(slug);
 
     var base = D.products.filter(function (p) {
-      if (favMode && !UPG.isFav(p.id)) return false;
+      if (favMode && !TOGIDB.isFav(p.id)) return false;
       if (slug !== "all" && p.cat !== slug) return false;
       if (q && p.name.toLowerCase().indexOf(q) === -1 && p.brand.toLowerCase().indexOf(q) === -1) return false;
       return true;
     });
 
-    var title = favMode ? UPG.t("shop.favs")
-      : cat ? (cat[UPG.lang()] || cat.uz) : (q ? '"' + q + '"' : UPG.t("shop.catalog"));
-    document.title = title + " — UPG";
+    var title = favMode ? TOGIDB.t("shop.favs")
+      : cat ? (cat[TOGIDB.lang()] || cat.uz) : (q ? '"' + q + '"' : TOGIDB.t("shop.catalog"));
+    document.title = title + " — Togi DB";
 
     var brands = [];
     base.forEach(function (p) { if (brands.indexOf(p.brand) === -1) brands.push(p.brand); });
@@ -176,44 +176,44 @@
 
     wrap.innerHTML =
       '<nav class="breadcrumb">' +
-        '<a href="index.html">' + UPG.t("shop.home") + '</a><span>/</span>' +
-        '<a href="index.html#catalog">' + UPG.t("shop.catalog") + '</a><span>/</span>' +
+        '<a href="index.html">' + TOGIDB.t("shop.home") + '</a><span>/</span>' +
+        '<a href="index.html#catalog">' + TOGIDB.t("shop.catalog") + '</a><span>/</span>' +
         '<b>' + esc(title) + '</b>' +
       '</nav>' +
       '<div class="catpage-hero">' +
         '<div class="catpage-hero__icon">' + iconSVG(cat ? cat.icon : "pc") + '</div>' +
         '<div><h1 class="catpage-hero__title">' + esc(title) + '</h1>' +
-        '<p class="catpage-hero__sub"><span id="resCount">' + base.length + '</span> ' + UPG.t("shop.results") + '</p></div>' +
+        '<p class="catpage-hero__sub"><span id="resCount">' + base.length + '</span> ' + TOGIDB.t("shop.results") + '</p></div>' +
       '</div>' +
       '<button class="filters-toggle" id="filtersToggle" type="button" aria-expanded="false" aria-controls="filters">' +
-        '<svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>' + UPG.t("shop.filters") + '</button>' +
+        '<svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>' + TOGIDB.t("shop.filters") + '</button>' +
       '<div class="shop">' +
         '<aside class="filters" id="filters">' +
-          '<div class="filters__head"><b>' + UPG.t("shop.filters") + '</b>' +
-            '<button class="filters__reset" id="resetFilters" type="button">' + UPG.t("shop.reset") + '</button></div>' +
+          '<div class="filters__head"><b>' + TOGIDB.t("shop.filters") + '</b>' +
+            '<button class="filters__reset" id="resetFilters" type="button">' + TOGIDB.t("shop.reset") + '</button></div>' +
           (brands.length > 1 ?
-          '<div class="filter-group"><b class="filter-group__title">' + UPG.t("shop.brand") + '</b>' +
+          '<div class="filter-group"><b class="filter-group__title">' + TOGIDB.t("shop.brand") + '</b>' +
             '<div class="filter-brands">' + brands.map(function (b) {
               return '<label class="fcheck"><input type="checkbox" value="' + esc(b) + '"><span>' + esc(b) + '</span></label>';
             }).join("") + '</div></div>' : "") +
-          '<div class="filter-group"><b class="filter-group__title">' + UPG.t("shop.price") + '</b>' +
+          '<div class="filter-group"><b class="filter-group__title">' + TOGIDB.t("shop.price") + '</b>' +
             '<div class="filter-price">' +
               '<input type="number" id="priceMin" placeholder="' + fmtNum(minP) + '" min="0">' +
               '<span>—</span>' +
               '<input type="number" id="priceMax" placeholder="' + fmtNum(maxP) + '" min="0">' +
             '</div>' +
-            '<button class="btn btn--ghost btn--sm filter-apply" id="applyPrice" type="button">' + UPG.t("shop.apply") + '</button>' +
+            '<button class="btn btn--ghost btn--sm filter-apply" id="applyPrice" type="button">' + TOGIDB.t("shop.apply") + '</button>' +
           '</div>' +
         '</aside>' +
         '<div class="shop-main">' +
           '<div class="sortbar">' +
-            '<span class="sortbar__count"><b id="shownCount">' + base.length + '</b> ' + UPG.t("shop.results") + '</span>' +
-            '<label class="sortbar__sort">' + UPG.t("shop.sort") +
+            '<span class="sortbar__count"><b id="shownCount">' + base.length + '</b> ' + TOGIDB.t("shop.results") + '</span>' +
+            '<label class="sortbar__sort">' + TOGIDB.t("shop.sort") +
               '<select id="sortSel">' +
-                '<option value="pop">' + UPG.t("shop.sortPop") + '</option>' +
-                '<option value="cheap">' + UPG.t("shop.sortCheap") + '</option>' +
-                '<option value="exp">' + UPG.t("shop.sortExp") + '</option>' +
-                '<option value="name">' + UPG.t("shop.sortName") + '</option>' +
+                '<option value="pop">' + TOGIDB.t("shop.sortPop") + '</option>' +
+                '<option value="cheap">' + TOGIDB.t("shop.sortCheap") + '</option>' +
+                '<option value="exp">' + TOGIDB.t("shop.sortExp") + '</option>' +
+                '<option value="name">' + TOGIDB.t("shop.sortName") + '</option>' +
               '</select></label>' +
           '</div>' +
           '<div class="prod-grid" id="catGridResults"></div>' +
@@ -237,10 +237,10 @@
       if (!list.length) {
         grid.classList.add("is-empty");
         grid.innerHTML = '<div class="shop-empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
-          '<b>' + UPG.t(favMode && !base.length ? "shop.favsEmpty" : "shop.empty") + '</b>' +
+          '<b>' + TOGIDB.t(favMode && !base.length ? "shop.favsEmpty" : "shop.empty") + '</b>' +
           (favMode && !base.length
-            ? '<a class="btn btn--ghost btn--sm" href="index.html#catalog">' + UPG.t("cart.emptyBtn") + '</a>'
-            : '<button class="btn btn--ghost btn--sm" id="emptyReset" type="button">' + UPG.t("shop.emptyBtn") + '</button>') +
+            ? '<a class="btn btn--ghost btn--sm" href="index.html#catalog">' + TOGIDB.t("cart.emptyBtn") + '</a>'
+            : '<button class="btn btn--ghost btn--sm" id="emptyReset" type="button">' + TOGIDB.t("shop.emptyBtn") + '</button>') +
           '</div>';
         var er = document.getElementById("emptyReset");
         if (er) er.addEventListener("click", resetAll);
@@ -303,43 +303,43 @@
     var p = productById(id);
 
     if (!p) {
-      wrap.innerHTML = '<div class="pdp-404"><h1>' + UPG.t("shop.notFound") + '</h1>' +
-        '<a class="btn btn--primary" href="index.html">' + UPG.t("shop.backHome") + '</a></div>';
+      wrap.innerHTML = '<div class="pdp-404"><h1>' + TOGIDB.t("shop.notFound") + '</h1>' +
+        '<a class="btn btn--primary" href="index.html">' + TOGIDB.t("shop.backHome") + '</a></div>';
       return;
     }
 
     var cat = catBySlug(p.cat);
-    var catTitle = cat ? (cat[UPG.lang()] || cat.uz) : "";
+    var catTitle = cat ? (cat[TOGIDB.lang()] || cat.uz) : "";
     var r = ratingFor(p.id);
     var disc = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
-    document.title = p.name + " — UPG";
+    document.title = p.name + " — Togi DB";
 
-    var favCls = UPG.isFav(p.id) ? " is-fav" : "";
-    var favStyle = UPG.isFav(p.id) ? ' style="fill:var(--secondary)"' : "";
+    var favCls = TOGIDB.isFav(p.id) ? " is-fav" : "";
+    var favStyle = TOGIDB.isFav(p.id) ? ' style="fill:var(--secondary)"' : "";
 
     /* Galereya: haqiqiy fotolar boʻlsa — asosiy rasm + kichik rasmlar,
        boʻlmasa — SVG chizma. */
     function gallery() {
-      var n = UPG_ART.count(p);
+      var n = TOGIDB_ART.count(p);
       if (!n) {
         return '<div class="pdp__media pdp__media--' + p.type + '" id="pdpMedia">' +
-          UPG_ART(p.type, p.brand) + '</div>';
+          TOGIDB_ART(p.type, p.brand) + '</div>';
       }
       var thumbs = "";
       for (var i = 1; i <= n; i++) {
         thumbs += '<button class="pdp__thumb pdp__media--' + p.type + (i === 1 ? " is-active" : "") +
           '" type="button" data-thumb="' + i + '" aria-label="' + i + '-rasm">' +
-          '<img src="' + UPG_ART.srcOf(p, i) + '" alt="" loading="lazy" decoding="async"></button>';
+          '<img src="' + TOGIDB_ART.srcOf(p, i) + '" alt="" loading="lazy" decoding="async"></button>';
       }
       return '<div class="pdp__media pdp__media--' + p.type + '" id="pdpMedia">' +
-          UPG_ART.media(p, 1, true) + '</div>' +
+          TOGIDB_ART.media(p, 1, true) + '</div>' +
         (n > 1 ? '<div class="pdp__thumbs">' + thumbs + '</div>' : "");
     }
 
     wrap.innerHTML =
       '<nav class="breadcrumb">' +
-        '<a href="index.html">' + UPG.t("shop.home") + '</a><span>/</span>' +
-        '<a href="index.html#catalog">' + UPG.t("shop.catalog") + '</a><span>/</span>' +
+        '<a href="index.html">' + TOGIDB.t("shop.home") + '</a><span>/</span>' +
+        '<a href="index.html#catalog">' + TOGIDB.t("shop.catalog") + '</a><span>/</span>' +
         '<a href="category.html?cat=' + p.cat + '">' + esc(catTitle) + '</a><span>/</span>' +
         '<b>' + esc(p.brand) + '</b>' +
       '</nav>' +
@@ -353,7 +353,7 @@
           '<h1 class="pdp__title">' + esc(p.name) + '</h1>' +
           '<div class="pdp__rating"><span class="stars" aria-label="5 dan ' + r.stars + ' yulduz">' + starsHTML(r.stars) + '</span>' +
             '<span>' + r.val.toFixed(1) + ' · ' + r.count + '</span>' +
-            '<span class="pdp__stock"><i></i>' + UPG.t("shop.inStock") + '</span></div>' +
+            '<span class="pdp__stock"><i></i>' + TOGIDB.t("shop.inStock") + '</span></div>' +
           '<div class="pdp__price">' +
             (p.old ? '<s>' + fmtNum(p.old) + ' ' + sumWord() + '</s>' : "") +
             '<b>' + fmtNum(p.price) + ' ' + sumWord() + '</b>' +
@@ -364,33 +364,33 @@
               '<button class="qtybtn" data-q="inc" type="button">+</button></div>' +
             '<button class="btn btn--primary pdp__add" id="pdpAdd" type="button">' +
               '<svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.6 12h10.8L21 8H7"/></svg>' +
-              UPG.t("shop.addCart") + '</button>' +
+              TOGIDB.t("shop.addCart") + '</button>' +
             '<button class="icon-btn pdp__fav' + favCls + '" id="pdpFav" data-fav="' + p.id + '" type="button" aria-label="Sevimlilar">' +
               '<svg viewBox="0 0 24 24"' + favStyle + '><path d="M12 21C6 16 3 12.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3.5-3 7-9 12z"/></svg></button>' +
           '</div>' +
           '<ul class="pdp__perks">' +
             '<li><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>' +
-              '<span><b>' + UPG.t("shop.warranty") + '</b>' + UPG.t("shop.warrantyVal") + '</span></li>' +
+              '<span><b>' + TOGIDB.t("shop.warranty") + '</b>' + TOGIDB.t("shop.warrantyVal") + '</span></li>' +
             '<li><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>' +
-              '<span><b>' + UPG.t("shop.delivery") + '</b>' + UPG.t("shop.deliveryVal") + '</span></li>' +
+              '<span><b>' + TOGIDB.t("shop.delivery") + '</b>' + TOGIDB.t("shop.deliveryVal") + '</span></li>' +
             '<li><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>' +
-              '<span><b>' + UPG.t("shop.pay") + '</b>' + UPG.t("shop.payVal") + '</span></li>' +
+              '<span><b>' + TOGIDB.t("shop.pay") + '</b>' + TOGIDB.t("shop.payVal") + '</span></li>' +
           '</ul>' +
         '</div>' +
       '</div>' +
       '<div class="pdp-details">' +
-        '<div class="pdp-block"><h2>' + UPG.t("shop.specs") + '</h2>' +
+        '<div class="pdp-block"><h2>' + TOGIDB.t("shop.specs") + '</h2>' +
           '<table class="spec-table"><tbody>' +
-            '<tr><td>' + UPG.t("spec.brand") + '</td><td>' + esc(p.brand) + '</td></tr>' +
-            '<tr><td>' + UPG.t("spec.category") + '</td><td>' + esc(catTitle) + '</td></tr>' +
-            '<tr><td>' + UPG.t("spec.code") + '</td><td>UPG-' + p.id.toUpperCase() + '</td></tr>' +
-            '<tr><td>' + UPG.t("spec.status") + '</td><td>' + UPG.t("shop.inStock") + '</td></tr>' +
+            '<tr><td>' + TOGIDB.t("spec.brand") + '</td><td>' + esc(p.brand) + '</td></tr>' +
+            '<tr><td>' + TOGIDB.t("spec.category") + '</td><td>' + esc(catTitle) + '</td></tr>' +
+            '<tr><td>' + TOGIDB.t("spec.code") + '</td><td>TOGIDB-' + p.id.toUpperCase() + '</td></tr>' +
+            '<tr><td>' + TOGIDB.t("spec.status") + '</td><td>' + TOGIDB.t("shop.inStock") + '</td></tr>' +
           '</tbody></table>' +
         '</div>' +
-        '<div class="pdp-block"><h2>' + UPG.t("shop.desc") + '</h2>' +
-          '<p class="pdp-desc">' + UPG.t("shop.descText") + '</p></div>' +
+        '<div class="pdp-block"><h2>' + TOGIDB.t("shop.desc") + '</h2>' +
+          '<p class="pdp-desc">' + TOGIDB.t("shop.descText") + '</p></div>' +
       '</div>' +
-      '<section class="related"><div class="section__head"><h2 class="section__title">' + UPG.t("shop.related") + '</h2></div>' +
+      '<section class="related"><div class="section__head"><h2 class="section__title">' + TOGIDB.t("shop.related") + '</h2></div>' +
         '<div class="prod-grid" id="relatedGrid"></div></section>';
 
     /* Miqdor */
@@ -402,7 +402,7 @@
         qtyEl.textContent = qty;
       });
     });
-    document.getElementById("pdpAdd").addEventListener("click", function () { UPG.addToCart(p.id, qty); });
+    document.getElementById("pdpAdd").addEventListener("click", function () { TOGIDB.addToCart(p.id, qty); });
 
     /* Galereya — kichik rasmni bosganda asosiysi almashadi */
     var thumbBtns = wrap.querySelectorAll("[data-thumb]");
@@ -410,7 +410,7 @@
       b.addEventListener("click", function () {
         thumbBtns.forEach(function (x) { x.classList.remove("is-active"); });
         b.classList.add("is-active");
-        document.getElementById("pdpMedia").innerHTML = UPG_ART.media(p, +b.dataset.thumb);
+        document.getElementById("pdpMedia").innerHTML = TOGIDB_ART.media(p, +b.dataset.thumb);
       });
     });
 
@@ -437,7 +437,7 @@
   else boot();
 
   /* Til oʻzgarganda sahifani qayta render qilamiz */
-  document.addEventListener("upg:langchange", function () {
+  document.addEventListener("togidb:langchange", function () {
     renderMega();
     renderCatGrid();
     if (document.getElementById("catPage")) renderCategoryPage();

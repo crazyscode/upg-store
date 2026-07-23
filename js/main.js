@@ -1,8 +1,8 @@
 /* ============================================================
-   UPG — umumiy funksiyalar (barcha sahifalarda ishlaydi)
+   Togi DB — umumiy funksiyalar (barcha sahifalarda ishlaydi)
    ============================================================ */
 
-window.UPG = (function () {
+window.TOGIDB = (function () {
   "use strict";
 
   /* ============================================================
@@ -10,7 +10,7 @@ window.UPG = (function () {
      ============================================================ */
   var I18N = {
     uz: {
-      "meta.title": "UPG — Gaming va kompyuter texnikasi | Toshkent",
+      "meta.title": "Togi DB — Gaming va kompyuter texnikasi | Toshkent",
       "tb.addr": "Toshkent, Navoiy koʻchasi 37 · Malika savdo markazi",
       "tb.hours": "Har kuni 10:00 — 20:00",
       "tb.hours2": "Har kuni 10:00 — 20:00",
@@ -73,19 +73,19 @@ window.UPG = (function () {
       "p.new": "Yangi",
       "p.sale": "Chegirma",
       "badge.new": "Yangi",
-      "sv.eyebrow": "Nega aynan UPG?",
+      "sv.eyebrow": "Nega aynan Togi DB?",
       "sv.title": "Xizmatlarimiz",
       "sv1t": "Bepul yetkazib berish",
       "sv1d": "Toshkent boʻylab 24 soat ichida, viloyatlarga 2–3 kunda yetkazamiz.",
       "sv2t": "Rasmiy kafolat",
       "sv2d": "Barcha mahsulotlarga 36 oygacha rasmiy kafolat va servis xizmati.",
       "sv3t": "Muddatli toʻlov",
-      "sv3d": "UPG Credit, Uzum Nasiya, Solfy va ZoodPay orqali 3–12 oyga boʻlib toʻlang.",
+      "sv3d": "Togi DB Credit, Uzum Nasiya, Solfy va ZoodPay orqali 3–12 oyga boʻlib toʻlang.",
       "sv4t": "Trade-in",
       "sv4d": "Eski texnikangizni topshiring va yangisiga chegirma bilan ega boʻling.",
       "ab.eyebrow": "Biz haqimizda",
       "ab.title": "15 yildan beri geymerlar tanlovi",
-      "ab.text": "UPG — 2009-yilda tashkil etilgan, bugungi kunda Oʻzbekistondagi eng yirik gaming texnika doʻkonlaridan biri. Biz xalqaro brendlarning rasmiy hamkorimiz, kibersport turnirlari tashkil qilamiz va butun mamlakat boʻylab kompyuter klublarini jihozlaymiz.",
+      "ab.text": "Togi DB — 2009-yilda tashkil etilgan, bugungi kunda Oʻzbekistondagi eng yirik gaming texnika doʻkonlaridan biri. Biz xalqaro brendlarning rasmiy hamkorimiz, kibersport turnirlari tashkil qilamiz va butun mamlakat boʻylab kompyuter klublarini jihozlaymiz.",
       "ab.s1": "yillik tajriba",
       "ab.s2": "+ ijobiy sharh",
       "ab.s3": "kibersport turniri",
@@ -97,7 +97,7 @@ window.UPG = (function () {
       "ts1.name": "Jasur T.", "ts1.role": "CS2 oʻyinchisi",
       "ts2.text": "Videokartani muddatli toʻlovga oldim, hujjatlar 10 daqiqada tayyor boʻldi. Narxlar bozordagi eng adolatlisi.",
       "ts2.name": "Aziz R.", "ts2.role": "Doimiy mijoz",
-      "ts3.text": "Kompyuter klubimizni toʻliq UPG jihozladi — 20 ta PK, monitorlar, kreslolar. Professional yondashuv uchun rahmat!",
+      "ts3.text": "Kompyuter klubimizni toʻliq Togi DB jihozladi — 20 ta PK, monitorlar, kreslolar. Professional yondashuv uchun rahmat!",
       "ts3.name": "Malika S.", "ts3.role": "Klub egasi",
       "st.eyebrow": "Doʻkonlarimiz",
       "st.title": "Bizga tashrif buyuring",
@@ -114,7 +114,7 @@ window.UPG = (function () {
       "fq1q": "Yetkazib berish qancha vaqt oladi?",
       "fq1a": "Toshkent boʻylab buyurtmalar 24 soat ichida, viloyatlarga 2–3 ish kunida yetkaziladi. 1 mln soʻmdan yuqori xaridlarga yetkazib berish bepul.",
       "fq2q": "Muddatli toʻlovni qanday rasmiylashtiraman?",
-      "fq2a": "Doʻkonda yoki saytda UPG Credit, Uzum Nasiya, Solfy yoki ZoodPay orqali 3 daqiqada rasmiylashtiriladi. Faqat pasport kerak.",
+      "fq2a": "Doʻkonda yoki saytda Togi DB Credit, Uzum Nasiya, Solfy yoki ZoodPay orqali 3 daqiqada rasmiylashtiriladi. Faqat pasport kerak.",
       "fq3q": "Kafolat qanday ishlaydi?",
       "fq3a": "Barcha mahsulotlarga 12–36 oylik rasmiy kafolat beriladi. Nosozlik yuzaga kelsa, servis markazimiz bepul taʼmirlaydi yoki almashtirib beradi.",
       "fq4q": "Yigʻilgan PKni sozlab berasizlarmi?",
@@ -138,7 +138,7 @@ window.UPG = (function () {
       "ft.l4": "Kafolat va qaytarish",
       "ft.l5": "Blog",
       "ft.contact": "Aloqa",
-      "ft.copy": "© 2009–2026 UPG. Barcha huquqlar himoyalangan.",
+      "ft.copy": "© 2009–2026 Togi DB. Barcha huquqlar himoyalangan.",
       /* toast */
       "t.cart": "Savatga qoʻshildi",
       "t.fav1": "Sevimlilarga qoʻshildi",
@@ -171,7 +171,7 @@ window.UPG = (function () {
       "shop.related": "Oʻxshash mahsulotlar",
       "shop.specs": "Xususiyatlari",
       "shop.desc": "Tavsif",
-      "shop.descText": "Rasmiy kafolatli original mahsulot. UPG — jahon brendlarining Oʻzbekistondagi rasmiy hamkori. Bepul yetkazib berish va muddatli toʻlov imkoniyati mavjud.",
+      "shop.descText": "Rasmiy kafolatli original mahsulot. Togi DB — jahon brendlarining Oʻzbekistondagi rasmiy hamkori. Bepul yetkazib berish va muddatli toʻlov imkoniyati mavjud.",
       "shop.warranty": "Kafolat",
       "shop.warrantyVal": "12 oy rasmiy",
       "shop.delivery": "Yetkazib berish",
@@ -200,7 +200,7 @@ window.UPG = (function () {
       "tab.catalog": "Katalog",
       "tab.cart": "Savat",
       "tab.favs": "Sevimlilar",
-      "app.installTitle": "UPG ilovasini oʻrnating",
+      "app.installTitle": "Togi DB ilovasini oʻrnating",
       "app.installText": "Bosh ekrandan bir bosishda oching — tezroq va oflayn ham ishlaydi.",
       "app.installBtn": "Oʻrnatish",
       "app.later": "Keyinroq",
@@ -212,7 +212,7 @@ window.UPG = (function () {
       "app.online": "Ulanish tiklandi"
     },
     ru: {
-      "meta.title": "UPG — Игровая и компьютерная техника | Ташкент",
+      "meta.title": "Togi DB — Игровая и компьютерная техника | Ташкент",
       "tb.addr": "Ташкент, ул. Навои 37 · ТЦ «Малика»",
       "tb.hours": "Ежедневно 10:00 — 20:00",
       "tb.hours2": "Ежедневно 10:00 — 20:00",
@@ -275,19 +275,19 @@ window.UPG = (function () {
       "p.new": "Новые",
       "p.sale": "Скидки",
       "badge.new": "Новинка",
-      "sv.eyebrow": "Почему именно UPG?",
+      "sv.eyebrow": "Почему именно Togi DB?",
       "sv.title": "Наши услуги",
       "sv1t": "Бесплатная доставка",
       "sv1d": "По Ташкенту за 24 часа, в регионы — за 2–3 дня.",
       "sv2t": "Официальная гарантия",
       "sv2d": "До 36 месяцев официальной гарантии и сервисный центр.",
       "sv3t": "Рассрочка",
-      "sv3d": "UPG Credit, Uzum Nasiya, Solfy и ZoodPay — от 3 до 12 месяцев.",
+      "sv3d": "Togi DB Credit, Uzum Nasiya, Solfy и ZoodPay — от 3 до 12 месяцев.",
       "sv4t": "Trade-in",
       "sv4d": "Сдайте старую технику и получите скидку на новую.",
       "ab.eyebrow": "О нас",
       "ab.title": "Выбор геймеров уже 15 лет",
-      "ab.text": "UPG — основанный в 2009 году, сегодня один из крупнейших магазинов игровой техники в Узбекистане. Мы официальные партнёры мировых брендов, проводим киберспортивные турниры и оснащаем компьютерные клубы по всей стране.",
+      "ab.text": "Togi DB — основанный в 2009 году, сегодня один из крупнейших магазинов игровой техники в Узбекистане. Мы официальные партнёры мировых брендов, проводим киберспортивные турниры и оснащаем компьютерные клубы по всей стране.",
       "ab.s1": "лет опыта",
       "ab.s2": "+ отзывов",
       "ab.s3": "турниров",
@@ -299,7 +299,7 @@ window.UPG = (function () {
       "ts1.name": "Жасур Т.", "ts1.role": "Игрок CS2",
       "ts2.text": "Взял видеокарту в рассрочку, документы оформили за 10 минут. Цены — самые честные на рынке.",
       "ts2.name": "Азиз Р.", "ts2.role": "Постоянный клиент",
-      "ts3.text": "UPG полностью оснастил наш компьютерный клуб — 20 ПК, мониторы, кресла. Спасибо за профессиональный подход!",
+      "ts3.text": "Togi DB полностью оснастил наш компьютерный клуб — 20 ПК, мониторы, кресла. Спасибо за профессиональный подход!",
       "ts3.name": "Малика С.", "ts3.role": "Владелица клуба",
       "st.eyebrow": "Наши магазины",
       "st.title": "Приходите в гости",
@@ -316,7 +316,7 @@ window.UPG = (function () {
       "fq1q": "Сколько занимает доставка?",
       "fq1a": "По Ташкенту заказы доставляются в течение 24 часов, в регионы — за 2–3 рабочих дня. При покупке от 1 млн сум доставка бесплатная.",
       "fq2q": "Как оформить рассрочку?",
-      "fq2a": "В магазине или на сайте через UPG Credit, Uzum Nasiya, Solfy или ZoodPay за 3 минуты. Нужен только паспорт.",
+      "fq2a": "В магазине или на сайте через Togi DB Credit, Uzum Nasiya, Solfy или ZoodPay за 3 минуты. Нужен только паспорт.",
       "fq3q": "Как работает гарантия?",
       "fq3a": "На все товары даётся официальная гарантия 12–36 месяцев. При неисправности наш сервисный центр бесплатно отремонтирует или заменит товар.",
       "fq4q": "Настраиваете ли вы собранный ПК?",
@@ -340,7 +340,7 @@ window.UPG = (function () {
       "ft.l4": "Гарантия и возврат",
       "ft.l5": "Блог",
       "ft.contact": "Контакты",
-      "ft.copy": "© 2009–2026 UPG. Все права защищены.",
+      "ft.copy": "© 2009–2026 Togi DB. Все права защищены.",
       "t.cart": "Добавлено в корзину",
       "t.fav1": "Добавлено в избранное",
       "t.fav0": "Удалено из избранного",
@@ -371,7 +371,7 @@ window.UPG = (function () {
       "shop.related": "Похожие товары",
       "shop.specs": "Характеристики",
       "shop.desc": "Описание",
-      "shop.descText": "Оригинальный товар с официальной гарантией. UPG — официальный партнёр мировых брендов в Узбекистане. Доступна бесплатная доставка и рассрочка.",
+      "shop.descText": "Оригинальный товар с официальной гарантией. Togi DB — официальный партнёр мировых брендов в Узбекистане. Доступна бесплатная доставка и рассрочка.",
       "shop.warranty": "Гарантия",
       "shop.warrantyVal": "12 мес. официальная",
       "shop.delivery": "Доставка",
@@ -399,7 +399,7 @@ window.UPG = (function () {
       "tab.catalog": "Каталог",
       "tab.cart": "Корзина",
       "tab.favs": "Избранное",
-      "app.installTitle": "Установите приложение UPG",
+      "app.installTitle": "Установите приложение Togi DB",
       "app.installText": "Открывайте с главного экрана в одно касание — быстрее и работает офлайн.",
       "app.installBtn": "Установить",
       "app.later": "Позже",
@@ -412,7 +412,7 @@ window.UPG = (function () {
     }
   };
 
-  var currentLang = localStorage.getItem("upg-lang") || "uz";
+  var currentLang = localStorage.getItem("togidb-lang") || "uz";
   var root = document.documentElement;
 
   function t(key) {
@@ -425,9 +425,9 @@ window.UPG = (function () {
 
   function applyLang(lang) {
     currentLang = lang;
-    localStorage.setItem("upg-lang", lang);
+    localStorage.setItem("togidb-lang", lang);
     root.setAttribute("lang", lang);
-    if (document.title.indexOf("UPG") !== -1 && !document.body.hasAttribute("data-page")) {
+    if (document.title.indexOf("Togi DB") !== -1 && !document.body.hasAttribute("data-page")) {
       document.title = t("meta.title");
     }
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
@@ -441,7 +441,7 @@ window.UPG = (function () {
     document.querySelectorAll(".lang-switch__btn").forEach(function (btn) {
       btn.classList.toggle("is-active", btn.dataset.lang === lang);
     });
-    document.dispatchEvent(new CustomEvent("upg:langchange", { detail: { lang: lang } }));
+    document.dispatchEvent(new CustomEvent("togidb:langchange", { detail: { lang: lang } }));
   }
 
   /* ============================================================
@@ -474,43 +474,43 @@ window.UPG = (function () {
     try { return JSON.parse(localStorage.getItem(key)) || []; }
     catch (e) { return []; }
   }
-  var cart = load("upg-cart");   // [{id, qty}]
-  var favs = load("upg-favs");   // [id]
+  var cart = load("togidb-cart");   // [{id, qty}]
+  var favs = load("togidb-favs");   // [id]
 
   /* Konfiguratorda yigʻilgan shaxsiy yigʻilmalar — sahifalar aro saqlanadi */
-  if (window.UPG_DATA) {
-    load("upg-builds").forEach(function (b) {
-      if (b && b.id && !UPG_DATA.products.some(function (p) { return p.id === b.id; })) {
-        UPG_DATA.products.push(b);
+  if (window.TOGIDB_DATA) {
+    load("togidb-builds").forEach(function (b) {
+      if (b && b.id && !TOGIDB_DATA.products.some(function (p) { return p.id === b.id; })) {
+        TOGIDB_DATA.products.push(b);
       }
     });
 
     /* Admin panel (admin.html) qoʻshgan mahsulotlar. Faqat shu brauzerda
        koʻrinadi — saytga chiqishi uchun admin.html'dan eksport qilinib,
        data.js va rasmlar commit qilinishi kerak. */
-    load("upg-admin-products").forEach(function (p) {
-      if (p && p.id && !UPG_DATA.products.some(function (x) { return x.id === p.id; })) {
-        UPG_DATA.products.push(p);
+    load("togidb-admin-products").forEach(function (p) {
+      if (p && p.id && !TOGIDB_DATA.products.some(function (x) { return x.id === p.id; })) {
+        TOGIDB_DATA.products.push(p);
       }
     });
     var pruned = cart.filter(function (line) {
-      return UPG_DATA.products.some(function (p) { return p.id === line.id; });
+      return TOGIDB_DATA.products.some(function (p) { return p.id === line.id; });
     });
     if (pruned.length !== cart.length) {
       cart = pruned;
-      localStorage.setItem("upg-cart", JSON.stringify(cart));
+      localStorage.setItem("togidb-cart", JSON.stringify(cart));
     }
   }
 
-  function saveCart() { localStorage.setItem("upg-cart", JSON.stringify(cart)); updateBadges(); renderDrawer(); }
-  function saveFavs() { localStorage.setItem("upg-favs", JSON.stringify(favs)); updateBadges(); }
+  function saveCart() { localStorage.setItem("togidb-cart", JSON.stringify(cart)); updateBadges(); renderDrawer(); }
+  function saveFavs() { localStorage.setItem("togidb-favs", JSON.stringify(favs)); updateBadges(); }
 
   function cartQty() { return cart.reduce(function (s, i) { return s + i.qty; }, 0); }
 
   function findProduct(id) {
-    if (!window.UPG_DATA) return null;
-    for (var i = 0; i < UPG_DATA.products.length; i++) {
-      if (UPG_DATA.products[i].id === id) return UPG_DATA.products[i];
+    if (!window.TOGIDB_DATA) return null;
+    for (var i = 0; i < TOGIDB_DATA.products.length; i++) {
+      if (TOGIDB_DATA.products[i].id === id) return TOGIDB_DATA.products[i];
     }
     return null;
   }
@@ -700,13 +700,13 @@ window.UPG = (function () {
     setTimeout(hide, 2500);
 
     /* Mavzu */
-    var saved = localStorage.getItem("upg-theme");
+    var saved = localStorage.getItem("togidb-theme");
     if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
     var themeBtn = document.getElementById("themeToggle");
     if (themeBtn) themeBtn.addEventListener("click", function () {
       var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
-      localStorage.setItem("upg-theme", next);
+      localStorage.setItem("togidb-theme", next);
     });
 
     /* Sticky header + toTop */
@@ -746,10 +746,10 @@ window.UPG = (function () {
     function closeSugg() { if (searchSugg) searchSugg.classList.remove("is-open"); }
 
     function renderSugg(q) {
-      if (!searchSugg || !window.UPG_DATA) return;
+      if (!searchSugg || !window.TOGIDB_DATA) return;
       q = q.trim().toLowerCase();
       if (q.length < 2) { closeSugg(); return; }
-      var found = UPG_DATA.products.filter(function (p) {
+      var found = TOGIDB_DATA.products.filter(function (p) {
         return p.name.toLowerCase().indexOf(q) !== -1 || p.brand.toLowerCase().indexOf(q) !== -1;
       }).slice(0, 6);
       if (!found.length) { closeSugg(); return; }
@@ -875,7 +875,7 @@ window.UPG = (function () {
     if (favIcon) favIcon.addEventListener("click", function () { location.href = "category.html?fav=1"; });
 
     /* Til oʻzgarganda savat oynasini qayta chizamiz */
-    document.addEventListener("upg:langchange", renderDrawer);
+    document.addEventListener("togidb:langchange", renderDrawer);
 
     /* Event delegation — savat/sevimli tugmalari (dinamik kartalar ham) */
     document.addEventListener("click", function (e) {

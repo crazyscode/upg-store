@@ -1,5 +1,5 @@
 /* ============================================================
-   UPG — PK Konfigurator
+   Togi DB — PK Konfigurator
    Komponentlarni tanlash + avtomatik moslik tekshiruvi
    ============================================================ */
 
@@ -9,11 +9,11 @@
   var app = document.getElementById("cfgApp");
   if (!app) return;
 
-  var esc = UPG.esc, iconSVG = UPG.iconSVG, fmt = UPG.fmt;
+  var esc = TOGIDB.esc, iconSVG = TOGIDB.iconSVG, fmt = TOGIDB.fmt;
 
   /* ---------- Komponentlar bazasi ----------
      socket: AM5 / LGA1851 ; ram: DDR5 ; tdp: vatt
-     Narxlar soʻmda (upg.uz darajasidagi real narxlar)          */
+     Narxlar soʻmda (togidb.uz darajasidagi real narxlar)          */
   var COMPONENTS = {
     cpu: [
       { id: "cpu1", type: "cpu", name: "AMD Ryzen 5 7500F", brand: "AMD", price: 1150000, socket: "AM5", ram: "DDR5", tdp: 65 },
@@ -77,7 +77,7 @@
       ok: "Barcha komponentlar mos!", pickAll: "Kerakli qismlarni tanlang",
       addCart: "Yigʻilmani savatga qoʻshish", reset: "Tozalash",
       added: "Yigʻilma savatga qoʻshildi!", incompatible: "Nomuvofiqliklar bor — tuzating",
-      buildName: "UPG shaxsiy yigʻilma", parts: "qism",
+      buildName: "Togi DB shaxsiy yigʻilma", parts: "qism",
       wSocket: "{cpu} ({s1}) anakartga ({s2}) mos emas",
       wRam: "{ram} anakart ({m}) bilan mos emas",
       wCooler: "Sovutgich {cpu} soketini ({s}) qoʻllab-quvvatlamaydi",
@@ -96,7 +96,7 @@
       ok: "Все компоненты совместимы!", pickAll: "Выберите нужные детали",
       addCart: "Добавить сборку в корзину", reset: "Сбросить",
       added: "Сборка добавлена в корзину!", incompatible: "Есть несовместимости — исправьте",
-      buildName: "UPG индивидуальная сборка", parts: "деталей",
+      buildName: "Togi DB индивидуальная сборка", parts: "деталей",
       wSocket: "{cpu} ({s1}) несовместим с платой ({s2})",
       wRam: "{ram} несовместима с платой ({m})",
       wCooler: "Кулер не поддерживает сокет {cpu} ({s})",
@@ -106,13 +106,13 @@
       required: "обязательно"
     }
   };
-  function L() { return STR[UPG.lang()] || STR.uz; }
+  function L() { return STR[TOGIDB.lang()] || STR.uz; }
   function tt(s, o) { return s.replace(/\{(\w+)\}/g, function (_, k) { return o[k]; }); }
 
   /* ---------- Holat ---------- */
   var sel = {};
-  try { sel = JSON.parse(localStorage.getItem("upg-build")) || {}; } catch (e) { sel = {}; }
-  function save() { localStorage.setItem("upg-build", JSON.stringify(sel)); }
+  try { sel = JSON.parse(localStorage.getItem("togidb-build")) || {}; } catch (e) { sel = {}; }
+  function save() { localStorage.setItem("togidb-build", JSON.stringify(sel)); }
 
   function get(slot) {
     var id = sel[slot];
@@ -157,10 +157,10 @@
   /* ---------- Render ---------- */
   function render() {
     var L2 = L();
-    document.title = L2.title + " — UPG";
+    document.title = L2.title + " — Togi DB";
     document.body.style.overflow = ""; // til almashganda ochiq picker qulfini yechamiz
     app.innerHTML =
-      '<nav class="breadcrumb"><a href="index.html">' + UPG.t("shop.home") + '</a><span>/</span><b>' + L2.title + '</b></nav>' +
+      '<nav class="breadcrumb"><a href="index.html">' + TOGIDB.t("shop.home") + '</a><span>/</span><b>' + L2.title + '</b></nav>' +
       '<div class="cfg-head"><div class="cfg-head__icon">' +
         '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></div>' +
         '<div><h1 class="cfg-head__title">' + L2.title + '</h1><p class="cfg-head__sub">' + L2.sub + '</p></div></div>' +
@@ -185,7 +185,7 @@
   }
 
   function slotArt(type, brand) {
-    return (window.UPG_ART ? UPG_ART(type, brand) : iconSVG(type));
+    return (window.TOGIDB_ART ? TOGIDB_ART(type, brand) : iconSVG(type));
   }
 
   function renderSlots() {
@@ -331,20 +331,20 @@
     var id = "build-" + Date.now();
     var build = {
       id: id, cat: "sborki", type: "pc",
-      brand: "UPG", name: L2.buildName + " (" + parts.length + " " + L2.parts + ")", price: a.total
+      brand: "Togi DB", name: L2.buildName + " (" + parts.length + " " + L2.parts + ")", price: a.total
     };
     // Sintetik mahsulot sifatida ro'yxatga qo'shamiz (savat uni topa olishi uchun)
-    window.UPG_DATA.products.push(build);
+    window.TOGIDB_DATA.products.push(build);
     // localStorage'da ham saqlaymiz — sahifa yangilanganda savat uni topa olsin
     var saved;
-    try { saved = JSON.parse(localStorage.getItem("upg-builds")) || []; } catch (e) { saved = []; }
+    try { saved = JSON.parse(localStorage.getItem("togidb-builds")) || []; } catch (e) { saved = []; }
     saved.push(build);
-    localStorage.setItem("upg-builds", JSON.stringify(saved));
-    UPG.addToCart(id, 1, true);
-    UPG.toast(L2.added);
+    localStorage.setItem("togidb-builds", JSON.stringify(saved));
+    TOGIDB.addToCart(id, 1, true);
+    TOGIDB.toast(L2.added);
   }
 
   /* ---------- Ishga tushirish ---------- */
   render();
-  document.addEventListener("upg:langchange", render);
+  document.addEventListener("togidb:langchange", render);
 })();

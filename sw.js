@@ -1,5 +1,5 @@
 /* ============================================================
-   UPG — Service Worker
+   Togi DB — Service Worker
    Oflayn ishlash, kesh va yangilanish boshqaruvi.
 
    Kesh strategiyalari:
@@ -12,13 +12,13 @@
 "use strict";
 
 /* MUHIM: har deployda oshiring (v2 -> v3 ...).
-   activate'da nomi mos kelmagan barcha "upg-*" keshlar oʻchiriladi, shunda
+   activate'da nomi mos kelmagan barcha "togidb-*" keshlar oʻchiriladi, shunda
    eski/keraksiz yozuvlar qolib ketmaydi. */
 var VERSION = "v2";
 
-var SHELL = "upg-shell-" + VERSION;   // app shell (HTML/CSS/JS/ikonka)
-var IMGS = "upg-img-" + VERSION;      // mahsulot rasmlari
-var FONTS = "upg-font-" + VERSION;    // Google Fonts
+var SHELL = "togidb-shell-" + VERSION;   // app shell (HTML/CSS/JS/ikonka)
+var IMGS = "togidb-img-" + VERSION;      // mahsulot rasmlari
+var FONTS = "togidb-font-" + VERSION;    // Google Fonts
 
 var OURS = [SHELL, IMGS, FONTS];
 
@@ -91,7 +91,7 @@ self.addEventListener("activate", function (e) {
       return Promise.all(
         keys.map(function (k) {
           /* Faqat oʻzimizning eski keshlarimizni oʻchiramiz */
-          if (k.indexOf("upg-") === 0 && OURS.indexOf(k) === -1) return caches.delete(k);
+          if (k.indexOf("togidb-") === 0 && OURS.indexOf(k) === -1) return caches.delete(k);
           return undefined;
         })
       );

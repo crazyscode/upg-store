@@ -1,7 +1,7 @@
 /* ============================================================
-   UPG — Admin panel (admin.html)
+   Togi DB — Admin panel (admin.html)
    Sayt statik: server yoʻq. Mahsulotlar localStorage'da saqlanadi
-   ("upg-admin-products") va main.js ularni UPG_DATA.products'ga
+   ("togidb-admin-products") va main.js ularni TOGIDB_DATA.products'ga
    qoʻshib qoʻyadi — shuning uchun saytda darhol koʻrinadi.
    Saytga haqiqiy chiqarish uchun data.js + rasmlar eksport qilinadi.
    ============================================================ */
@@ -9,8 +9,8 @@
 (function () {
   "use strict";
 
-  var KEY = "upg-admin-products";
-  var D = window.UPG_DATA;
+  var KEY = "togidb-admin-products";
+  var D = window.TOGIDB_DATA;
   var MAX_IMGS = 3;
   var SIZE = 500;
 
@@ -289,7 +289,7 @@
       '<article class="prod-card is-visible">' +
         (p.old ? '<span class="badge badge--sale">−' + disc + "%</span>" : "") +
         '<span class="prod-card__media prod-card__media--' + p.type + '">' +
-          UPG_ART.media(p, 1, true) + "</span>" +
+          TOGIDB_ART.media(p, 1, true) + "</span>" +
         '<div class="prod-card__body">' +
           '<span class="prod-card__cat">' + esc(p.brand) + "</span>" +
           '<h3 class="prod-card__name">' + esc(p.name) + "</h3>" +
@@ -341,7 +341,7 @@
       var cat = catBySlug(p.cat);
       return '<div class="adm-item">' +
         '<span class="adm-item__art prod-card__media--' + p.type + '">' +
-          UPG_ART.media(p, 1, true) + "</span>" +
+          TOGIDB_ART.media(p, 1, true) + "</span>" +
         '<div class="adm-item__info">' +
           "<b>" + esc(p.name) + "</b>" +
           "<small>" + esc(p.id) + " · " + esc(cat ? cat.uz : p.cat) + " · " + esc(p.brand) +
@@ -513,7 +513,7 @@
       var root = document.documentElement;
       var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
       root.setAttribute("data-theme", next);
-      try { localStorage.setItem("upg-theme", next); } catch (e) {}
+      try { localStorage.setItem("togidb-theme", next); } catch (e) {}
     });
   }
 

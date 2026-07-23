@@ -1,6 +1,6 @@
-# UPG — Gaming va kompyuter texnikasi
+# Togi DB — Gaming va kompyuter texnikasi
 
-[upg.uz](https://upg.uz/) saytining zamonaviy, toʻliq funksional qayta ishlanishi. Brend ranglari saqlangan (`#FF0096`, `#FF3139`), mahsulotlar haqiqiy saytdan olingan.
+[togidb.uz](https://togidb.uz/) saytining zamonaviy, toʻliq funksional qayta ishlanishi. Brend ranglari saqlangan (`#FF0096`, `#FF3139`), mahsulotlar haqiqiy saytdan olingan.
 
 ## Xususiyatlar
 
@@ -24,7 +24,7 @@ xuddi shu fayllar.
 - **Oʻrnatish** — Android/desktop Chrome'da 3 soniyadan keyin «Ilovani oʻrnating»
   banneri chiqadi. iOS Safari'da `beforeinstallprompt` yoʻq, shuning uchun
   «Ulashish → Bosh ekranga qoʻshish» yoʻriqnomasi koʻrsatiladi. Rad etilsa
-  14 kun qayta soʻralmaydi (`upg-install-dismissed`).
+  14 kun qayta soʻralmaydi (`togidb-install-dismissed`).
 - **Pastki tab-bar** — Bosh sahifa / Katalog / Savat / Sevimlilar, badge'lar bilan.
   Mobil kenglikda (≤860px) va ilova rejimida koʻrinadi; `js/app.js` uni barcha
   sahifalarga inject qiladi.
@@ -115,4 +115,4 @@ Statik sayt boʻlgani uchun istalgan hostingga joylashadi:
 
 PWA oʻrnatilishi uchun **HTTPS shart** — yuqoridagi uchala hosting ham buni oʻzi
 taʼminlaydi. Barcha yoʻllar nisbiy, shuning uchun ilova subpath'da
-(`…/upg-store/`) ham, domen ildizida ham ishlaydi.
+(`…/togidb-store/`) ham, domen ildizida ham ishlaydi.

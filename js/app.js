@@ -1,5 +1,5 @@
 /* ============================================================
-   UPG — mobil ilova qobigʻi (PWA)
+   Togi DB — mobil ilova qobigʻi (PWA)
 
    Vazifalari:
      · service worker'ni roʻyxatdan oʻtkazish va yangilanishni boshqarish
@@ -8,7 +8,7 @@
      · "Ilovani oʻrnatish" taklifi (Android/desktop) va iOS yoʻriqnomasi
      · oflayn holat indikatori
 
-   main.js dan keyin yuklanadi — window.UPG mavjud deb hisoblaydi.
+   main.js dan keyin yuklanadi — window.TOGIDB mavjud deb hisoblaydi.
    admin.html'ga ulanmaydi: u lokal vosita, ilova qobigʻi kerak emas.
    ============================================================ */
 
@@ -16,7 +16,7 @@
   "use strict";
 
   var root = document.documentElement;
-  var t = UPG.t;
+  var t = TOGIDB.t;
 
   /* ============================================================
      Standalone rejimni aniqlash
@@ -111,11 +111,11 @@
     }
 
     /* Savat tugmasi — drawer ochadi */
-    nav.querySelector('[data-tab="cart"]').addEventListener("click", UPG.openCart);
+    nav.querySelector('[data-tab="cart"]').addEventListener("click", TOGIDB.openCart);
 
     /* Badge'larni joriy holatga keltiramiz (main.js init'i tab-bar'dan
        oldin ishlagan, shuning uchun qayta chaqiramiz) */
-    UPG.syncBadges();
+    TOGIDB.syncBadges();
   }
 
   /* ============================================================
@@ -163,7 +163,7 @@
   /* ============================================================
      Pastki varaq (oʻrnatish taklifi / iOS yoʻriqnomasi)
      ============================================================ */
-  var DISMISS_KEY = "upg-install-dismissed";
+  var DISMISS_KEY = "togidb-install-dismissed";
   var DISMISS_DAYS = 14;
 
   function dismissed() {
@@ -377,7 +377,7 @@
   function handleShortcuts() {
     var params = new URLSearchParams(location.search);
     if (params.get("open") === "cart") {
-      UPG.openCart();
+      TOGIDB.openCart();
       /* URL'ni tozalaymiz — yangilashda savat qayta ochilmasin */
       params.delete("open");
       var q = params.toString();

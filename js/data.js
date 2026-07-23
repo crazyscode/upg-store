@@ -1,9 +1,9 @@
 /* ============================================================
-   UPG — mahsulotlar bazasi
-   Barcha nomlar va narxlar upg.uz saytidan olingan (real data)
+   Togi DB — mahsulotlar bazasi
+   Barcha nomlar va narxlar togidb.uz saytidan olingan (real data)
    ============================================================ */
 
-window.UPG_DATA = {
+window.TOGIDB_DATA = {
   categories: [
     { slug: "sborki",       uz: "Tayyor yigʻilmalar",        ru: "Готовые сборки",      type: "pc",        icon: "pc" },
     { slug: "noutbuklar",   uz: "Noutbuklar",                ru: "Ноутбуки",            type: "laptop",    icon: "laptop" },
@@ -22,9 +22,9 @@ window.UPG_DATA = {
 
   products: [
     /* ---- Tayyor yigʻilmalar ---- */
-    { id: "sb1", cat: "sborki", brand: "UPG",    type: "pc", name: "UPG START — Ryzen 5 7500F / RTX 5060 8GB / 16GB",  price: 9500000 },
-    { id: "sb2", cat: "sborki", brand: "UPG",    type: "pc", name: "UPG PRO — Ryzen 7 9800X3D / RTX 5070 Ti 16GB / 32GB", price: 24900000 },
-    { id: "sb3", cat: "sborki", brand: "UPG",    type: "pc", name: "UPG ULTRA — Core Ultra 9 285K / RTX 5090 32GB / 64GB", price: 58700000 },
+    { id: "sb1", cat: "sborki", brand: "Togi DB",    type: "pc", name: "Togi DB START — Ryzen 5 7500F / RTX 5060 8GB / 16GB",  price: 9500000 },
+    { id: "sb2", cat: "sborki", brand: "Togi DB",    type: "pc", name: "Togi DB PRO — Ryzen 7 9800X3D / RTX 5070 Ti 16GB / 32GB", price: 24900000 },
+    { id: "sb3", cat: "sborki", brand: "Togi DB",    type: "pc", name: "Togi DB ULTRA — Core Ultra 9 285K / RTX 5090 32GB / 64GB", price: 58700000 },
     { id: "sb4", cat: "sborki", brand: "Zotac",  type: "pc", name: "Zotac Magnus One i5-10400F / 16GB / 1TB / 500W", price: 7440000, img: 3 },
     { id: "sb5", cat: "sborki", brand: "Zotac",  type: "pc", name: "Zotac Magnus One i3-10100F / 8GB / 1TB / 500W",  price: 6200000, img: 3 },
 

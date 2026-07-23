@@ -1,5 +1,5 @@
 /* ============================================================
-   UPG — zamonaviy dizayn
+   Togi DB — zamonaviy dizayn
    Brend ranglari saqlangan: #FF0096, #FF3139, #0f0f0f, #ededed
    ============================================================ */
 
@@ -175,15 +175,15 @@ body.loaded .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
   min-height: var(--header-h);
 }
 
-/* Logo — brend uslubida: UPG + magenta RADE */
+/* Logo — brend uslubida: Togi + magenta DB */
 .logo {
   font-family: var(--font-head);
   font-size: 1.6rem; font-weight: 700; font-style: italic;
   letter-spacing: -0.5px; display: inline-flex; line-height: 1;
   user-select: none;
 }
-.logo__upg { color: var(--text); }
-.logo__rade {
+.logo__brand { color: var(--text); }
+.logo__accent {
   background: var(--grad);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
@@ -1072,7 +1072,7 @@ a.dealbar__item:hover { opacity: 1; text-decoration: underline; }
 .footer__col a, .footer__col span { color: rgba(252, 252, 252, 0.62); font-size: 0.9rem; transition: color 0.2s; }
 .footer__col a:hover { color: var(--primary); }
 
-.footer__col--brand .logo__upg { color: #fcfcfc; }
+.footer__col--brand .logo__brand { color: #fcfcfc; }
 .footer__col--brand p { color: rgba(252, 252, 252, 0.62); font-size: 0.9rem; max-width: 300px; margin-top: 14px; }
 
 .footer__socials { display: flex; gap: 10px; margin-top: 18px; }

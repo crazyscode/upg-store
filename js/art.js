@@ -1,10 +1,10 @@
 /* ============================================================
-   UPG — mahsulot illyustratsiyalari (SVG "render"lar)
+   Togi DB — mahsulot illyustratsiyalari (SVG "render"lar)
    Har bir mahsulot turi uchun brendlangan realistik vizual.
-   window.UPG_ART(type, brand) -> SVG markup (string)
+   window.TOGIDB_ART(type, brand) -> SVG markup (string)
    ============================================================ */
 
-window.UPG_ART = (function () {
+window.TOGIDB_ART = (function () {
   "use strict";
 
   function esc(s) {
